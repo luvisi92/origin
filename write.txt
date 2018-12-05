@@ -1,0 +1,1 @@
+echo 'hello' >> /data/hh/mvn1
