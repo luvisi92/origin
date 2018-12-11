@@ -1,0 +1,109 @@
+<@main.header title="网站地图">
+<#escape x as x?html>
+<script>
+    var imgPath = '${setting['files.contextpath']}';
+</script>
+</#escape>
+</@main.header>
+<@main.body>
+<!--网站地图-->
+<div class="container project-detailed">
+
+    <div class="row">
+
+        <div class="col-md-9">
+            <div class="bgfff">
+                <div class="article">
+                    <h2 class="t-center p-b-20">深圳全球安信息科技有限公司网站地图</h2>
+                    <div class="bold">
+                        <h3>产品中心</h3>
+                    </div>
+                    <div class="p-t-20  lh30">
+                        <p class="f18">硬件</p>
+                    	<#if pCategoryList??&&pCategoryList?size gt 0>
+                    		<#list pCategoryList as pCategory>
+                    			<div><a href="${base}/QqsProduct/list.html?type=1&selectCatId=${pCategory.catId}">${pCategory.catName!}</a></div>
+                    		</#list>
+                    	</#if>
+                    </div>
+
+                    <div class="p-t-20 lh30">
+                        <p class="f18">软件</p>
+                    	<#if sCategoryList??&&sCategoryList?size gt 0>
+                    		<#list sCategoryList as sCategory>
+                    			<div><a href="${base}/QqsProduct/list.html?type=2&selectCatId=${sCategory.catId!}">${sCategory.catName!}</a></div>
+                    		</#list>
+                    	</#if>                      
+                    </div>
+
+                    <div class="bold top-border m-t-30">
+                        <h3>解决方案</h3>
+                    </div>
+                    <div class="p-t-20  lh30">
+                    	<#if categoryList??&&categoryList?size gt 0>
+                    		<#list categoryList as category>
+                    			<div><a href="${base}/QqsSolution/index.html?type=${category.id!}">${category.name!}</a></div>
+                    		</#list>
+                    	</#if>
+                    </div>
+                    
+                    <div class="bold top-border m-t-30">
+                        <h3>服务机构</h3>
+                    </div>
+                    <div class="p-t-20  lh30">
+                        <div>广东省：<a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a><a href="###" style="padding-right:16px;">台湾省</a></div>
+                    </div>
+                    
+                    <div class="bold top-border m-t-30">
+                        <h3>供应商平台</h3>
+                    </div>
+                    <div class="p-t-20  lh30">
+                        <div><a href="${base}/QqsSelfRecommendation/qqsSelfRecommendation.html">供应商自荐</a></div>
+                        <div><a href="${base}/home.html#join">成为代理商</a></div>
+                        <div><a href="${base}/home.html#join">成为服务商</a></div>
+                        <div><a href="${base}/home.html#join">成为供应商</a></div>
+                    </div>    
+                    
+                    <div class="bold top-border m-t-30">
+                        <h3>关于我们</h3>
+                    </div>
+                    <div class="p-t-20  lh30">
+                        <div><a href="${base}/AboutUs/aboutUs.html">企业简介</a></div>
+                        <div>公司概况：
+	                        <a href="${base}/QqsNews/news.html?type=2"  style="padding-right:16px;">企业咨询</a>
+	                        <a href="${base}/AboutUs/teamIntroduction.html"  style="padding-right:16px;">团队介绍</a>
+	                        <a href="${base}/AboutUs/developmentHistory.html"  style="padding-right:16px;">发展历程</a>
+	                        <a href="${base}/AboutUs/join.html"  style="padding-right:16px;">加入全球安</a>
+                        </div>
+                        <div><a href="${base}/QqsServiceSupport/serviceSupport.html">服务支持</a></div>
+                        <div><a href="${base}/AboutUs/aboutUs.html#connectUs">联系我们</a></div>
+                    </div>                                        
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="all-top">
+                <div class="bgfff">
+                    <div class="fw-list">
+                        <ul>
+                            <li>
+                                <a href="${base}/AboutUs/legalDeclaration.html">法律声明</a>
+                            </li>
+                            <li class="fw-cur">
+                                <a href="${base}/AboutUs/webSiteMap.html">网站地图</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+</script>
+</#escape>
+</@main.footer>

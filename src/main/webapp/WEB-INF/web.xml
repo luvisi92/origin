@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"> 
+	
+	<context-param>
+	<param-name>webAppRootKey</param-name>
+	<param-value>ac_buyer</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring/*.xml</param-value>
+	</context-param>
+	<!-- 添加日志监听器 -->
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>classpath:logback.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>  
+       <param-name>forceEncoding</param-name>  
+       <param-value>true</param-value>  
+    </init-param>  
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+        <filter-name>DruidWebStatFilter</filter-name>
+        <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+        <init-param>
+            <param-name>exclusions</param-name>
+            <!-- 排除统计干扰 -->
+            <param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>DruidWebStatFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+		<filter>
+		<filter-name>trimFilter</filter-name>
+		<filter-class>com.zhisou.qqs.portal.website.core.TrimParameterFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>trimFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>org.spring.rest</param-value> <!-- won't find anything -->
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    <servlet-name>formValidatorServlet</servlet-name>
+    <servlet-class>com.likegene.framework.core.formvalidator.SpringValidatorServlet</servlet-class>
+    <init-param>
+      <param-name>formScriptFolder</param-name>
+      <param-value>/assets/validatejs/</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>formValidatorServlet</servlet-name>
+    <url-pattern>/formValidator</url-pattern>
+  </servlet-mapping>
+	
+	<servlet>
+		<servlet-name>HttpStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HttpStatView</servlet-name>
+		<url-pattern>/http/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DbStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+		<!--  <init-param>  
+            <param-name>jmxUrl</param-name>  
+            <param-value>service:jmx:rmi://localhost/jndi/rmi://localhost:9004/jmxrmi</param-value>  
+        </init-param> -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DbStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+	<session-config>
+       <session-timeout>30</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<error-page> 
+    	<error-code>500</error-code> 
+        <location>/WEB-INF/views/error.jsp</location> 
+    </error-page>
+    
+</web-app>

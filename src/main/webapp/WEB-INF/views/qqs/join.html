@@ -1,0 +1,148 @@
+<@main.header title="首页">
+<#escape x as x?html>
+<script>
+    var imgPath = '${setting['files.contextpath']}';
+</script>
+    <style>
+        body {
+            background:#fff;
+        }
+    </style>
+</#escape>
+</@main.header>
+<@main.body>
+<div class="all-height"></div>
+<div class="all-pic">
+   	<img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+</div>
+
+<div class="container-fluid">
+    <div class="pb60">
+        <div class="container">
+            <h4>加入全球安</h4>
+            <p class="p-t-30">我们提供在公司安防、互联网、新兴智能科技等领域的工作机会，收入和福利将与您的资历和经验相匹配。请仔细阅读我们的空缺职位。<br>
+                如果您对为我们工作感兴趣，请将个人简历发至yangjing1125@foxmail.com ，或邮递至以下地址<br>
+                深圳福田区，香蜜湖娱乐城南门，A1栋维赢会二楼（邮编：518000）</p>
+        </div>
+    </div>
+
+</div>
+
+<form method="post" id="searchForm" action="${base}/AboutUs/join.html" autocomplete="off">    
+<div class="container-fluid top-border">
+    <div class="pb30">
+        <div class="container">
+            <h4>职位空缺</h4>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="pb30">
+		            <#if (pager.entityList)?exists && ((pager.entityList)?size != 0)>
+					<#list pager.entityList as recruit>                    
+                    	<#if recruit_index==0>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>
+                        </#if>
+                        <#if recruit_index==3>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>
+                        </#if>
+                        <#if recruit_index==6>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div> 
+                        </#if> 
+					</#list>    
+					</#if>                                              
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="pb30">
+		            <#if (pager.entityList)?exists && ((pager.entityList)?size != 0)>
+					<#list pager.entityList as recruit>                      
+                    	<#if recruit_index==1>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>
+                        </#if>
+                        <#if recruit_index==4>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>
+                        </#if>
+                        <#if recruit_index==7>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>   
+                        </#if>  
+					</#list>    
+					</#if>                                           
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="pb30">
+		            <#if (pager.entityList)?exists && ((pager.entityList)?size != 0)>
+					<#list pager.entityList as recruit>                      
+                    	<#if recruit_index==2>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>
+                        </#if>
+                        <#if recruit_index==5>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>
+                        </#if>
+                        <#if recruit_index==8>
+                        <div class="recruit">
+                            <h4>${recruit.positionname!}</h4>
+                            <p>地点：${recruit.workingPlace!}</p>
+                            <p>工作内容：<br>${recruit.jobDescription!}</p>
+                            <p>任职资格：<br>${recruit.jobRequirements!}</p>
+                        </div>  
+                        </#if>   
+					</#list>    
+					</#if>                                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	    <div>
+				<@main.pagination pager=pager/>
+		</div>    
+</div>
+</form>
+
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+</script>
+</#escape>
+</@main.footer>

@@ -1,0 +1,199 @@
+<@main.header title="供应商自荐">
+<#escape x as x?html> 
+<script>
+	var imgPath = '${setting['files.contextpath']}';
+</script>	
+    <style>
+        body {
+            background:#fff;
+        }
+    </style>
+</#escape> 
+</@main.header>
+<@main.body>
+<div class="all-height"></div>
+<div class="all-pic">
+    <img src="${base}/assets/images/cp8.jpg"/>
+</div>
+
+<div class="container">
+    <div class="pb30 t-center">
+        <h2>供应商自荐</h2>
+    </div>
+</div>
+
+<div class="container-fluid top-border"  >
+	 <form class="form-inline myformId" id="myformId">
+    <div class="p-t-60">
+        <div class="container">
+            <div class="cp-list-title ">
+                <h1>基本情况</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="name" id="name" size="30" value="${(entity.name)!}" placeholder="供应商名称">
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="address" id="address" size="30" value="${(entity.address)!}" placeholder="供应商地址">
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="properties" id="properties" size="30" value="${(entity.properties)!}" placeholder="企业性质">
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="url" id="url" size="30" value="${(entity.url)!}" placeholder="供应商网址">
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20 ">
+                            <input type="date" class="form-control width100 data-input" name="establishDate" id="establishDate" size="30" value="${(entity.establishDate)!}" value="公司成立时间" />
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="registeredCapital" id="registeredCapital" size="30" value="${(entity.registeredCapital)!}" placeholder="注册资金">
+                        </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="p-t-60">
+        <div class="container">
+            <div class="cp-list-title ">
+                <h1>联系方式</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="legalRepresentative" id="legalRepresentative" size="30" value="${(entity.legalReprsesntative)!}" placeholder="法人代表">
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="tel" id="tel" size="30" value="${(entity.tel)!}" placeholder="联系电话">
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="fax" id="fax" size="30" value="${(entity.fax)!}" placeholder="传真">
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="contactsPerson" id="contactsPerson" size="30" value="${(entity.contactsPerson)!}" placeHolder="业务联系人">
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="contactsTel" id="contactsTel" size="30" value="${(entity.contactsTel)!}" placeHolder="联系电话">
+                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20">
+                            <input type="text" class="form-control width100" name="contactsFax" id="contactsFax" size="30" value="${(entity.contactsFax)!}" placeHolder="传真">
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                        <div class="form-group width100 p-b-20 yzm">
+                            <input type="text" class="form-control width60 l" name="code"  id="code" placeholder="验证码">
+                            <img src="${base}/assets/vcode_image.jsp" style="cursor:pointer;" class="r" id="captchaImage"/>
+                        </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+	</form>
+</div>
+
+<div class="container">
+    <div class="row">
+       <div class="col-md-12">
+           <div class="pb30 t-center">
+               <button type="button" class="btn btn-primary" style="padding: 8px 40px">提交</button>
+           </div>
+       </div>
+    </div>
+
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+ 	// 更换验证码
+    $('#captchaImage').click(function(){
+         $('#captchaImage').attr("src", "${base}/assets/vcode_image.jsp?timestamp=" + (new Date()).valueOf());
+    }); 
+    $('.btn-primary').click(function(){
+        $.ajax({
+              type:'post',
+              traditional :true,
+              url:'${base}/QqsSelfRecommendation/save.json',
+              data:$(".myformId").serialize(),
+              success:function(data){
+		        	switch(data.code){
+		        	case 401:
+		        		var n = noty({
+				            text        : data.message,
+				            type        : 'error',
+				            dismissQueue: true,
+				            layout      : 'topCenter',
+				            theme       : 'relax',
+				            timeout		: 1500,
+				            callback: {     // 设置回调函数
+						        afterClose: function() {
+						        	
+						        }
+						    }
+				        });
+	        			break;
+	        		default:
+		        		if (data.success){
+			        		var n = noty({
+					            text        : data.message,
+					            type        : 'success',
+					            dismissQueue: true,
+					            layout      : 'topCenter',
+					            theme       : 'relax',
+					            timeout		: 1500,
+					            callback: {     // 设置回调函数
+							        afterClose: function() {
+							        	location.href="${base}/index.html";
+							        }
+						    	}
+					        });
+			        	}else{
+			        		var n = noty({
+					            text        : data.message,
+					            type        : 'error',
+					            dismissQueue: true,
+					            layout      : 'topCenter',
+					            theme       : 'relax',
+					            timeout		: 1500
+					        });
+			        	}
+		        	}
+		        },
+              error:function(data){
+                alert('ajax错误');
+              }
+          });
+    });
+
+</script>
+</#escape>
+</@main.footer>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+			
+	<bean id="queryService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}queryService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QueryService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean>	
+	<bean id="qqsShopService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}qqsShopService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.QqsShopService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="qqsArticleService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}qqsArticleService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.QqsArticleService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="qqsNewsService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}qqsNewsService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.QqsNewsService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="qqsRegionsService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}qqsRegionsService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.QqsRegionsService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="qqsSolutionService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}qqsSolutionService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.QqsSolutionService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="qqsSolutionCategoryService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}qqsSolutionCategoryService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.QqsSolutionCategoryService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysConfigService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysConfigService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.SysConfigService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysFileService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysFileService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.SysFileService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysLogService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysLogService" />
+		<property name="serviceInterface" value="com.zhisou.qqs.website.service.SysLogService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysRoleService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysRoleService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.SysRoleService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysRoleResourceService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysRoleResourceService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.SysRoleResourceService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysUserService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysUserService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.SysUserService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysUserResourceService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysUserResourceService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.SysUserResourceService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="sysUserRoleService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}sysUserRoleService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.SysUserRoleService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>
+	<bean id="qqsCompanyTeamService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="${rmi.service.url}qqsCompanyTeamService" />
+		<property name="serviceInterface"
+			value="com.zhisou.qqs.website.service.QqsCompanyTeamService" />
+		<property name="lookupStubOnStartup" value="false" />
+		<property name="refreshStubOnConnectFailure" value="true" />
+	</bean>    
+	<bean id="qqsBannerService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsBannerService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsBannerService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean>    
+	<bean id="qqsServiceSupportService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsServiceSupportService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsServiceSupportService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean>
+	 <bean id="qqsJoinCooperationService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsJoinCooperationService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsJoinCooperationService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+      </bean> 
+	  <bean id="qqsSelfRecommendationService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsSelfRecommendationService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsSelfRecommendationService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+      </bean>     
+	  <bean id="qqsKeywordService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsKeywordService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsKeywordService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+       </bean>      
+	 <bean id="qqsSoftProductService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsSoftProductService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsSoftProductService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+      </bean>   
+    <bean id="qqsProductService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="${rmi.service.url}qqsProductService" />
+        <property name="serviceInterface" value="com.zhisou.qqs.website.service.QqsProductService" />
+        <property name="lookupStubOnStartup" value="false" />
+        <property name="refreshStubOnConnectFailure" value="true" />
+    </bean>
+    <bean id="qqsProductCategoryService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="${rmi.service.url}qqsProductCategoryService" />
+        <property name="serviceInterface" value="com.zhisou.qqs.website.service.QqsProductCategoryService" />
+        <property name="lookupStubOnStartup" value="false" />
+        <property name="refreshStubOnConnectFailure" value="true" />
+    </bean> 
+	<bean id="qqsRecruitService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsRecruitService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsRecruitService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean>  
+	<bean id="qqsYearProcessService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsYearProcessService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsYearProcessService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean> 
+	<bean id="qqsMonthProcessService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsMonthProcessService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsMonthProcessService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean>           
+	<bean id="qqsOrgService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsOrgService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsOrgService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean>
+     <bean id="qqsServiceTypeService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" >  
+         <property name="serviceUrl" value="${rmi.service.url}qqsServiceTypeService" />  
+         <property name="serviceInterface"    value="com.zhisou.qqs.website.service.QqsServiceTypeService"/>  
+		 <property name="lookupStubOnStartup" value="false" />
+		 <property name="refreshStubOnConnectFailure" value="true" />
+     </bean>       
+</beans>

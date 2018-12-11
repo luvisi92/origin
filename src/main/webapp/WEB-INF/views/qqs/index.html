@@ -1,0 +1,1222 @@
+<@main.header title="首页">
+<#escape x as x?html>
+<script>
+    var imgPath = '${setting['files.contextpath']}';
+    $(function () {
+        //验证码输入框
+        $('.input-width').width($('.input-group').width() -136);
+        $(window).resize(function () {
+            $('.input-width').width($('.input-group').width() -136);
+        });
+
+        //幻灯片
+        var swiperH = new Swiper('.swiper-container-h', {
+        	observer:true,//修改swiper自己或子元素时，自动初始化swiper 
+        	observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+            slidesPerView: 1,
+            spaceBetween: 0,
+            autoHeight: true, //高度随内容变化
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+        });
+
+        //解决方案
+        var ydSwiper = new Swiper ('#qqaBanner', {
+        	observer:true,//修改swiper自己或子元素时，自动初始化swiper 
+        	observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+            initialSlide:0,
+            loop: true,
+            centeredSlides : true,
+            slidesPerView : '4',
+            spaceBetween : 0,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                1024: {
+                    slidesPerView:4,
+                    spaceBetween: 0,
+                },
+                768: {
+                    slidesPerView:2,
+                    spaceBetween: 0,
+                },
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                }
+            }
+        })
+
+
+        //新闻中心
+        var newSwiper = new Swiper('.swiper-container-new', {
+        	observer:true,//修改swiper自己或子元素时，自动初始化swiper 
+        	observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+            slidesPerView:4,
+            spaceBetween: 0,
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next-new',
+                prevEl: '.swiper-button-prev-new',
+            },
+            breakpoints: {
+                1024: {
+                    slidesPerView:3,
+                    spaceBetween: 0,
+                },
+                768: {
+                    slidesPerView:2,
+                    spaceBetween: 0,
+                },
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                }
+
+            }
+        })
+    })
+</script>
+</#escape>
+</@main.header>
+<@main.body>
+<div class="all-height"></div>
+
+<!-- Swiper -->
+<div class="swiper-container swiper-container-h" >
+    <div class="swiper-wrapper">
+    	<#if bannerList??&&bannerList?size gt 0>
+    		<#list bannerList as banner>
+		        <div class="swiper-slide">
+		           <img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+		        </div>    		
+    		</#list>
+    	</#if>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Pagination -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev "></div>
+
+
+</div>
+<!--幻灯片结束-->
+
+<!--头部文字区域-->
+<div class="title-list">
+    <div class="title-list-show shadow">
+        <h1 class="t-center blue-shen f20 bold p-b-10">全球安业务范围</h1>
+        <div class="row">
+            <div class="col-md-3 col-xs-6">
+                <h4 class="blue">全球安解决方案</h4>
+                <p class="three-text f14">基于百度安全部门丰富的技术和经验，提供DDOS，云服务器防护，漏洞扫描等安全功能，保障客户业务系统稳定运行</p>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <h4 class="blue">全球安解决方案</h4>
+                <p class="three-text f14">基于百度安全部门丰富的技术和经验，提供DDOS，云服务器防护，漏洞扫描等安全功能，保障客户业务系统稳定运行</p>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <h4 class="blue">全球安解决方案</h4>
+                <p class="three-text f14">基于百度安全部门丰富的技术和经验，提供DDOS，云服务器防护，漏洞扫描等安全功能，保障客户业务系统稳定运行</p>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <h4 class="blue">全球安解决方案</h4>
+                <p class="three-text f14">基于百度安全部门丰富的技术和经验，提供DDOS，云服务器防护，漏洞扫描等安全功能，保障客户业务系统稳定运行</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--头部文字区域结束-->
+
+<!--解决方案-->
+<div class="bgf5">
+    <div class="container ">
+        <div class="pb30">
+            <div class="row">
+                <div class="col-md-10 col-xs-8 flex">
+                    <div class="bold p-r-20 f26">解决方案</div>
+                    <#if solutionKeyList??&&solutionKeyList?size gt 0>
+                    <#list solutionKeyList as solutionKey>
+                    <div class="index-nav">
+                    	<#if solutionKey.keyword??&&solutionKey.keyword?length gt 6>
+                    		<a href="###" onclick="getSulotionData(${solutionKey.id!});">${solutionKey.keyword?substring(0,6)}</a>
+                    	<#else>
+                    		<a href="###" onclick="getSulotionData(${solutionKey.id!});">${solutionKey.keyword!}</a>
+                    	</#if>
+                    </div>
+                    </#list>
+                    </#if>
+                </div>
+                <div class="col-md-2 col-xs-4 p-t-10 t-right index-more">
+                    <a href="${base}/QqsSolution/index.html"> 查看更多 <i class="iconfont icon-icon1"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="qqaBanner" class="swiper-container">
+        <div class="swiper-wrapper sulotionData">
+        	<#if qqsSolutionCategoryList??&&qqsSolutionCategoryList?size gt 0>
+        	<#list qqsSolutionCategoryList as qqsSolutionCategory>
+	            <div class="swiper-slide" style="cursor: pointer;" onclick="window.location.href='${base}/QqsSolution/index.html?type=${qqsSolutionCategory.id}';">
+ 	                <img src="<#if (qqsSolutionCategory.logo)?? && qqsSolutionCategory.logo != ''>${setting['files.contextpath']}${(qqsSolutionCategory.logo)!}</#if>" alt="">
+	                <div class="info">
+	                    <h3><a href="###">${qqsSolutionCategory.name!}</a></h3>
+	                    <div class="f14 en">${qqsSolutionCategory.englishName!}</div>
+	                    <p>${qqsSolutionCategory.brief!}</p>
+	                    <em></em>
+	                </div>
+	            </div>	        	
+        	</#list>
+        	</#if>
+        </div>
+        <div class="swiper-button-prev">
+        </div>
+        <div class="swiper-button-next"></div>
+
+    </div>
+</div>
+<!--解决方案结束-->
+
+<!--产品中心-->
+<div class="container">
+    <div class="pb30">
+        <div class="row">
+            <div class="col-md-10 col-xs-8 flex">
+                <div class="bold p-r-20 f26">产品中心</div>
+                <#if productKeyList??&&productKeyList?size gt 0>
+                <#list productKeyList as productKey>
+                <div class="index-nav">
+                    	<#if productKey.keyword??&&productKey.keyword?length gt 6>
+                    	 	 <a href="###" onclick="getProductData(${productKey.id!});">${productKey.keyword?substring(0,6)}</a>
+                    	<#else>
+                    		 <a href="###" onclick="getProductData(${productKey.id!});">${productKey.keyword!}</a>
+                    	</#if>                
+                </div>
+                </#list>
+                </#if>
+            </div>
+            <div class="col-md-2 col-xs-4 p-t-10 t-right index-more">
+                <a href="${base}/QqsProduct/list.html?type=1">查看更多 <i class="iconfont icon-icon1"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<#if productList??&&productList?size gt 0>
+<!--5个-->
+<div class="container p-t-30  productDiv product-5">
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+        	<#list productList as product>
+        	<#if product_index==0>
+            <div class="p-b-20">
+                <div class="all-pic pic-hover">
+                    <a href="${base}/QqsProduct/hardwareDetail.html?productId=${product.productId!}&type=1">
+                        <img src="<#if (product.pic)?? && product.pic != ''>${setting['files.contextpath']}${(product.pic)!}</#if>" alt="">
+                        <h4>${product.name!}</h4>
+                        <p>${product.model!}</p>
+                        <em>
+                            <div class="white f16">${product.name!}</div>
+                            <div class="white f12">${product.model!}</div>
+                        </em>
+                    </a>
+                </div>
+            </div>
+            </#if>
+            <#if product_index==1>
+            <div class="all-pic pic-hover-last">
+                <a href="${base}/QqsProduct/hardwareDetail.html?productId=${product.productId!}&type=1">
+                    <img src="<#if (product.pic1)?? && product.pic1 != ''>${setting['files.contextpath']}${(product.pic1)!}</#if>" alt="">
+                    <h4>${product.name!}</h4>
+                    <em>
+                        <div class="white f16">${product.model!}</div>
+                    </em>
+                </a>
+            </div>
+            </#if>
+            </#list>
+        </div>    	
+        <div class="col-md-6 col-sm-6">
+            <div class="all-top flex">
+            	<#list productList as product>
+            	<#if product_index==2>
+                <div class="all-pic p-r-10 pic-hover-last">
+                    <a href="${base}/QqsProduct/hardwareDetail.html?productId=${product.productId!}&type=1">
+                        <img src="<#if (product.pic2)?? && product.pic2 != ''>${setting['files.contextpath']}${(product.pic2)!}</#if>" alt="">
+                        <h4>${product.name!}</h4>
+                        <em>
+                            <div class="white f16">${product.model!}</div>
+                        </em>
+                    </a>
+                </div>
+                </#if>
+                <#if product_index==3>
+                <div class="all-pic  p-l-10 pic-hover-last">
+                    <a href="${base}/QqsProduct/hardwareDetail.html?productId=${product.productId!}&type=1">
+                        <img src="<#if (product.pic2)?? && product.pic2 != ''>${setting['files.contextpath']}${(product.pic2)!}</#if>" alt="">
+                        <h4>${product.name!}</h4>
+
+                        <em>
+                            <div class="white f16">${product.model!}</div>
+
+                        </em>
+                    </a>
+                </div>
+                </#if>
+                </#list>
+            </div>
+            <#list productList as product>
+            <#if product_index==4>
+            <div class="p-t-20">
+                <div class="all-pic pic-hover">
+                    <a href="${base}/QqsProduct/hardwareDetail.html?productId=${product.productId!}&type=1">
+                        <img src="<#if (product.pic)?? && product.pic != ''>${setting['files.contextpath']}${(product.pic)!}</#if>" alt="">
+                        <h4>${product.name!}</h4>
+                        <p>${product.model!}</p>
+                        <em>
+                            <div class="white f16">${product.name!}</div>
+                            <div class="white f12">${product.model!}</div>
+                        </em>
+                    </a>
+                </div>
+            </div>
+            </#if>
+            </#list>
+        </div>    	
+    </div>
+</div>
+</#if>
+
+<!--服务机构-->
+<div class="container">
+    <div class=" pc-top">
+        <div class="row">
+            <div class="col-md-10 col-xs-8 flex">
+                <div class="bold p-r-20 f26">服务机构</div>
+                <#if shopKeyList??&&shopKeyList?size gt 0>
+                <#list shopKeyList as shoptKey>
+                <div class="index-nav">
+                    	<#if shoptKey.keyword??&&shoptKey.keyword?length gt 6>
+                    		 <a href="###" onclick="getShopData(${shoptKey.id!});">${shoptKey.keyword?substring(0,6)}</a>
+                    	<#else>
+                    		 <a href="###" onclick="getShopData(${shoptKey.id!});">${shoptKey.keyword!}</a>
+                    	</#if>                   
+                </div>
+                </#list>
+                </#if>
+            </div>
+            <div class="col-md-2 col-xs-4 p-t-10 t-right index-more">
+                <a href="${base}/shop/showShops.html">查看更多 <i class="iconfont icon-icon1"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row shopData">
+    		<#if shopList??&&shopList?size gt 0>
+    		<#list shopList as shop>
+            <div class="col-md-4 col-sm-6 p-t-10">
+                <div class="mechanism flex">
+                    <div class="mechanism-left">
+                        <i class="iconfont icon-weixiuweibao"></i>
+                    </div>
+                    <div class="flex-one mechanism-center">
+                        <div class="blue"><i class="iconfont icon-dianhua"></i> ${shop.tel!}</div>
+                        <div class="one-text f16 p-t-6"> ${shop.name!}</div>
+                        <div class="f999 f12 p-t-6"><i class="iconfont icon-mingpian"></i> ${shop.userName!}</div>
+                    </div>
+                    <div class="mechanism-right blue">
+                        <a href="${base}/shop/shopDetail.html?id=${shop.id!}">
+                            <i class="iconfont icon-dizhi"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>    		
+    		</#list>
+    		</#if>
+    </div>
+</div>
+
+<!--新闻中心-->
+<div class="container">
+    <div class=" pc-top">
+        <div class="row">
+            <div class="col-md-10 col-xs-8 flex">
+                <div class="bold p-r-20 f26">新闻中心</div>
+                <#if newsKeyList??&&newsKeyList?size gt 0>
+                <#list newsKeyList as newsKey>
+                <div class="index-nav">
+                    	<#if newsKey.keyword??&&newsKey.keyword?length gt 6>
+                    		 <a href="###" onclick="getNewsData(${newsKey.id!});">${newsKey.keyword?substring(0,6)}</a>
+                    	<#else>
+                    		 <a href="###" onclick="getNewsData(${newsKey.id!});">${newsKey.keyword!}</a>
+                    	</#if>                    
+                </div>
+                </#list>
+                </#if>
+            </div>
+            <div class="col-md-2 col-xs-4 p-t-10 t-right index-more">
+                <a href="${base}/QqsNews/news.html?type=1">查看更多 <i class="iconfont icon-icon1"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pb30">
+    <div class="swiper-container swiper-container-new" id="join">
+        <div class="swiper-wrapper newsData">     
+        	<#if newsList??&&newsList?size gt 0>
+        	<#list newsList as news>
+            <div class="swiper-slide " onclick="window.location.href='${base}/QqsNews/detail.html?id=${news.newsId!}';">
+                <div class="grid">
+                    <figure class="effect-lily">
+                        <img src="<#if (news.picture)?? && news.picture != ''>${setting['files.contextpath']}${(news.picture)!}</#if>" alt="">
+                        <figcaption>
+                            <h4>${news.title!}</h4>
+                            <p>${news.brief!}</p>
+                        </figcaption>
+                        <em></em>
+                    </figure>
+                </div>
+            </div>                              	
+        	</#list>	
+        	</#if>       
+        </div>
+        <!-- Add Pagination -->
+        <!--<div class="swiper-pagination"></div>-->
+        <div class="swiper-button-next-new swiper-button-white"></div>
+        <div class="swiper-button-prev-new swiper-button-white"></div>
+    </div>
+</div>
+
+<!--加盟合作-->
+<div class="container">
+    <div class=" pc-top">
+        <div class="row">
+            <div class="col-md-10 col-xs-8 flex">
+                <div class="bold p-r-20 f26">加盟合作</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="pb30">
+        <div class="row">
+	        <form id="myFormId" method="post"  class="form-horizontal" role="form" >
+			   	<input type="hidden" id="joinType" name="joinType" value=""/>
+			   	<input type="hidden" id="name" name="name" value=""/>
+			   	<input type="hidden" id="tel" name="tel" value=""/>
+			   	<input type="hidden" id="email" name="email" value=""/>
+			   	<input type="hidden" id="province" name="province" value=""/>
+				<input type="hidden" id="city" name="city" value="" />
+			   	<input type="hidden" id="content" name="content" value=""/>
+			   	<input type="hidden" id="code" name="code" value=""/>
+			   	<input type="hidden" id="codeCheck" name="codeCheck" value=""/>
+			</form>
+            <div class="col-md-4">
+                <div>
+                    <h4>
+                        		代理商
+                    </h4>
+                </div>                
+                <form class="bs-example bs-example-form">
+                   <div class="input-group p-b-10">
+                       <span class="input-group-addon" id="basic-addon1">姓名</span>
+                       <input type="text" class="form-control" id="name1" name="name1" placeholder="请输入" aria-describedby="basic-addon1">
+                   </div>
+
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon2">电话</span>
+                        <input type="tel" class="form-control" id="tel1" name="tel1" placeholder="请输入" aria-describedby="basic-addon2">
+                    </div>
+
+                   <div class="input-group p-b-10">
+                       <span class="input-group-addon" id="basic-addon3">邮箱</span>
+                       <input type="text" class="form-control" id="email1" name="email1" placeholder="请输入" aria-describedby="basic-addon3">
+                   </div>
+
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon4">省份</span>
+                        <div class="dropdown" style="width:100%">
+                            <select id="province1" name="province1" onchange="getCity(this)">
+                                
+                            </select>
+                        </div>
+                        <span class="input-group-addon" id="basic-addon5">城市</span>
+                        <div class="dropdown" style="width:100%">
+                            <select id="city1" name="city1">
+                                <option value="110100">北京市</option>
+                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon6">留言</span>
+                        <textarea class="form-control" id="content1" name="content1" rows="3" placeholder="请输入"   style="resize:none"></textarea>
+                    </div>
+                    <div class="input-group p-b-10">
+                        <input type="text" class="form-control l input-width" id="code1" name="code1" placeholder="请输入验证码">
+                        <img id="captchaImage1" src="${base}/assets/vcode_image1.jsp"  style="height:44px"/>
+                    </div>
+                </form>
+                <div class="p-t-10">
+                    <button type="button" id="save1" class="btn btn-primary btn-save" style="padding: 6px 30px;" onclick="join(this)">提交</button>
+                </div>
+            </div>
+             <div class="col-md-4">
+                <div>
+                    <h4>
+                        		服务商
+                    </h4>
+                </div>                
+                <form class="bs-example bs-example-form">
+                   <div class="input-group p-b-10">
+                       <span class="input-group-addon" id="basic-addon1">姓名</span>
+                       <input type="text" class="form-control" id="name2" name="name2" placeholder="请输入" aria-describedby="basic-addon1">
+                   </div>
+
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon2">电话</span>
+                        <input type="tel" class="form-control" id="tel2" name="tel2" placeholder="请输入" aria-describedby="basic-addon2">
+                    </div>
+
+                   <div class="input-group p-b-10">
+                       <span class="input-group-addon" id="basic-addon3">邮箱</span>
+                       <input type="text" class="form-control" id="email2" name="email2" placeholder="请输入" aria-describedby="basic-addon3">
+                   </div>
+
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon4">省份</span>
+                        <div class="dropdown" style="width:100%">
+                            <select id="province2" name="province2" onchange="getCity(this)">
+                                
+                            </select>
+                        </div>
+                        <span class="input-group-addon" id="basic-addon5">城市</span>
+                        <div class="dropdown" style="width:100%">
+                            <select id="city2" name="city2">
+                                <option value="110100">北京市</option>
+                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon6">留言</span>
+                        <textarea class="form-control" id="content2" name="content2" rows="3" placeholder="请输入"   style="resize:none"></textarea>
+                    </div>
+                    <div class="input-group p-b-10">
+                        <input type="text" class="form-control l input-width" id="code2" name="code2" placeholder="请输入验证码">
+                        <img id="captchaImage2" src="${base}/assets/vcode_image2.jsp"  style="height:44px"/>
+                    </div>
+                </form>
+                <div class="p-t-10">
+                    <button type="button" id="save2" class="btn btn-primary btn-save" style="padding: 6px 30px;" onclick="join(this)">提交</button>
+                </div>
+            </div>
+             <div class="col-md-4">
+                <div>
+                    <h4>
+                        		供应商
+                    </h4>
+                </div>                
+                <form class="bs-example bs-example-form">
+                   <div class="input-group p-b-10">
+                       <span class="input-group-addon" id="basic-addon1">姓名</span>
+                       <input type="text" class="form-control" id="name3" name="name3" placeholder="请输入" aria-describedby="basic-addon1">
+                   </div>
+
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon2">电话</span>
+                        <input type="tel" class="form-control" id="tel3" name="tel3" placeholder="请输入" aria-describedby="basic-addon2">
+                    </div>
+
+                   <div class="input-group p-b-10">
+                       <span class="input-group-addon" id="basic-addon3">邮箱</span>
+                       <input type="text" class="form-control" id="email3" name="email3" placeholder="请输入" aria-describedby="basic-addon3">
+                   </div>
+
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon4">省份</span>
+                        <div class="dropdown" style="width:100%">
+                            <select id="province3" name="province3" onchange="getCity(this)">
+                                
+                            </select>
+                        </div>
+                        <span class="input-group-addon" id="basic-addon5">城市</span>
+                        <div class="dropdown" style="width:100%">
+                           <select id="city3" name="city3">
+                                <option value="110100">北京市</option>
+                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group p-b-10">
+                        <span class="input-group-addon" id="basic-addon6">留言</span>
+                        <textarea class="form-control" id="content3" name="content3" rows="3" placeholder="请输入"   style="resize:none"></textarea>
+                    </div>
+                    <div class="input-group p-b-10">
+                        <input type="text" class="form-control l input-width" id="code3" name="code3" placeholder="请输入验证码">
+                        <img id="captchaImage3" src="${base}/assets/vcode_image3.jsp"  style="" style="height:44px"/>
+                    </div>
+                </form>
+                <div class="p-t-10">
+                    <button type="button" id="save3" class="btn btn-primary btn-save" style="padding: 6px 30px;" onclick="join(this)">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+$(function(){
+ 	// 更换验证码
+    $('#captchaImage1').click(function(){
+         $('#captchaImage1').attr("src", "${base}/assets/vcode_image1.jsp?timestamp=" + (new Date()).valueOf());
+    });
+    $('#captchaImage2').click(function(){
+        $('#captchaImage2').attr("src", "${base}/assets/vcode_image2.jsp?timestamp=" + (new Date()).valueOf());
+   });  
+    $('#captchaImage3').click(function(){
+        $('#captchaImage3').attr("src", "${base}/assets/vcode_image3.jsp?timestamp=" + (new Date()).valueOf());
+   });  
+	$.ajax({
+		type:'post',
+        traditional :true,
+        url:'${base}/joinCooperation/getProvince.json', 
+        success:function(data){
+        	if (data.success){
+        		var provinceList=data.obj;
+        		 
+					for(var i=0;i<provinceList.length;i++){
+						
+						$("#province1").append("<option value='"+provinceList[i].code+"' >"+provinceList[i].localName+"</option>");
+						$("#province2").append("<option value='"+provinceList[i].code+"' >"+provinceList[i].localName+"</option>");
+						$("#province3").append("<option value='"+provinceList[i].code+"' >"+provinceList[i].localName+"</option>");
+					} 
+                }else{
+                  var n = noty({
+                      text        : data.message,
+                      type        : 'error',
+                      dismissQueue: true,
+                      layout      : 'topCenter',
+                      theme       : 'relax',
+                      timeout   : 1500
+                  });
+             }
+        },
+        error:function(data){
+        	
+        	alert('ajax错误');
+        }
+    });
+  });
+//加盟合作提交
+function join(obj){
+	var id=obj.id;
+	var joinType;
+	if(id=="save1"){
+		 var name=$("#name1").val();
+		 var tel=$("#tel1").val(); 
+		 var email=$("#email1").val();
+		 var content=$("#content1").val();
+		 var code=$("#code1").val();
+		 var province=$("#province1").val();
+		 var city=$("#city1").val();
+		 $("#codeCheck").val("0");
+		 joinType="0";
+	}else if(id=="save2"){
+		 var name=$("#name2").val();
+		 var tel=$("#tel2").val();
+		 var email=$("#email2").val();
+		 var content=$("#content2").val();
+		 var code=$("#code2").val();
+		 var province=$("#province2").val();
+		 var city=$("#city2").val();
+		 $("#codeCheck").val("1");
+		 joinType="1";
+	}else{
+		 var name=$("#name3").val();
+		 var tel=$("#tel3").val();
+		 var email=$("#email3").val();
+		 var content=$("#content3").val();
+		 var code=$("#code3").val();
+		 var province=$("#province3").val();
+		 var city=$("#city3").val();
+		 $("#codeCheck").val("2");
+		 joinType="2";
+	} 
+	//隐藏域赋值
+	copyto(name,tel,email,content,code,joinType,province,city);
+		//前端验证
+	var massag = "";
+	if (name == null || name == '') {
+        massag += "姓名不能为空";
+      }
+      if (tel == null || tel == '') {
+        if(massag != "") {
+          massag += ",";
+        }
+        massag += "手机不能为空";
+      } else {
+        var reg = /^1[3|4|5|7|8][0-9]{9}$/;
+        if (!reg.test(tel)) {
+          if(massag != "") {
+            massag += ",";
+          }
+          massag += "请输入正确手机号";
+        }
+      }
+      if (email == null || email == '') {
+          if(massag != "") {
+            massag += ",";
+          }
+          massag += "邮箱不能为空";
+        } else {
+        	var re = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+          if (!re.test(email)) {
+            if(massag != "") {
+              massag += ",";
+            }
+            massag += "邮箱格式不对";
+          }
+        }
+      
+	if (massag != "") {
+            var n = noty({
+              text        : massag,
+              type        : 'error',
+              dismissQueue: true,
+              layout      : 'topCenter',
+              theme       : 'relax',
+              timeout     : 1500
+          });
+
+          return;
+        }
+//		if($("#myFormId").validateForm(saveQqsJoinCooperationConfig)) {
+		$.ajax({
+			type:'post',
+            traditional :true,
+            url:'${base}/joinCooperation/save.json',
+            data:$("#myFormId").serialize(),  
+	        success:function(data){
+	        	if (data.success){
+	                  var n = noty({
+	                      text        : '提交成功，我们会有专人跟您沟通跟进',
+	                      type        : 'success',
+	                      dismissQueue: true,
+	                      layout      : 'topCenter',
+	                      theme       : 'relax',
+	                      timeout   : 1500
+	                  });
+	                  clean();
+	                  if(id=="save1"){
+	                	
+	                	  $('#captchaImage1').attr("src", "${base}/assets/vcode_image1.jsp?timestamp=" + (new Date()).valueOf());
+	                  }else if(id=="save2"){
+	                	  $('#captchaImage2').attr("src", "${base}/assets/vcode_image2.jsp?timestamp=" + (new Date()).valueOf());
+	                  }else{
+	                	  $('#captchaImage3').attr("src", "${base}/assets/vcode_image3.jsp?timestamp=" + (new Date()).valueOf());
+	                  }
+	                  
+	                }else{
+	                  var n = noty({
+	                      text        : data.message,
+	                      type        : 'error',
+	                      dismissQueue: true,
+	                      layout      : 'topCenter',
+	                      theme       : 'relax',
+	                      timeout   : 1500
+	                  });
+	             }
+	        },
+	        error:function(data){
+	        	
+	        	alert('ajax错误');
+	        }
+	    });
+//		}
+}
+/*表单清空**/
+function clean(){
+	  $('#name').val("");
+	  $('#tel').val("");
+	  $('#email').val("");
+	  $('#province').val("");
+	  $('#city').val("");
+	  $('.content').val("");
+	  $('#code').val("");
+ }
+ /**隐藏表单辅值**/
+ function copyto(name,tel,email,content,code,joinType,province,city){
+	 $("#name").val(name);
+	 $("#tel").val(tel);
+	 $("#email").val(email);
+	 $("#content").val(content);
+	 $("#code").val(code);
+	 $("#joinType").val(joinType);
+	 $("#province").val(province);
+	 $("#city").val(city);
+
+	 province
+ }
+ 
+	
+ function getCity(obj){
+	 
+	 var id=obj.id;
+	 var code=$(obj).val();
+
+	 $.ajax({
+			type:'post',
+	        traditional :true,
+	        url:'${base}/joinCooperation/getCity.json', 
+	        data:{code:code},
+	        success:function(data){
+
+	        	if (data.success){
+	        		var cityList=data.obj;	        									
+							if(id=="province1"){
+								$("#city1").empty();
+								for(var i=0;i<cityList.length;i++){
+								$("#city1").append("<option value='"+cityList[i].code+"' >"+cityList[i].localName+"</option>");
+								}
+							}else if(id=="province2"){
+								$("#city2").empty();
+								for(var i=0;i<cityList.length;i++){
+								$("#city2").append("<option value='"+cityList[i].code+"' >"+cityList[i].localName+"</option>");
+								}
+							}else if(id=="province3"){
+								$("#city3").empty();
+								for(var i=0;i<cityList.length;i++){
+								$("#city3").append("<option value='"+cityList[i].code+"' >"+cityList[i].localName+"</option>");
+								}
+							}
+												
+						 
+	                }else{
+	                  var n = noty({
+	                      text        : data.message,
+	                      type        : 'error',
+	                      dismissQueue: true,
+	                      layout      : 'topCenter',
+	                      theme       : 'relax',
+	                      timeout   : 1500
+	                  });
+	             }
+	        },
+	        error:function(data){
+	        	
+	        	alert('ajax错误');
+	        }
+	 });
+ }
+ 
+ //获取解决方案
+ function getSulotionData(id){
+	 $.ajax({
+			type:'post',
+	        traditional :true,
+	        url:'${base}/index/getSolutionData.json', 
+	        data:{id:id},
+	        success:function(data){
+	        	if (data.success){
+	        		var str ="";
+        		    $.each(data.obj,function(n,entity) {  
+        		    	
+        	             if(entity.logo){
+        	            	 pic = '${setting['files.contextpath']}'+entity.logo;
+        	             }else{
+        	            	 pic = '${base}/assets/images/ss1.jpg';
+        	             }
+        	             str +='<div class="swiper-slide">';
+        	             str +='<img src="'+pic+'" alt="">';
+        	             str +='<div class="info">';
+        	             str +='<h3><a href="${base}/QqsSolution/index.html?type='+entity.id+'">'+entity.name+'</a></h3>';
+        	             str +='<div class="f14 en">'+entity.englishName+'</div>';
+        	             str +='<p>'+entity.brief+'</p></div></div>';
+        	           });  
+        	           $(".sulotionData").html(str);  
+        	           new Swiper ('#qqaBanner', {
+        	           	   observer:true,//修改swiper自己或子元素时，自动初始化swiper 
+        	           	   observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+        	               initialSlide:0,
+        	               loop: true,
+        	               centeredSlides : true,
+        	               slidesPerView : '4',
+        	               spaceBetween : 0
+        	           })
+												
+	                }else{
+	                  var n = noty({
+	                      text        : data.message,
+	                      type        : 'error',
+	                      dismissQueue: true,
+	                      layout      : 'topCenter',
+	                      theme       : 'relax',
+	                      timeout   : 1500
+	                  });
+	             }
+	        },
+	        error:function(data){
+	        	
+	        	alert('ajax错误');
+	        }
+	 });	 
+ }
+ //获取硬件产品
+ function getProductData(id){
+	 $.ajax({
+			type:'post',
+	        traditional :true,
+	        url:'${base}/index/getProductData.json', 
+	        data:{id:id},
+	        success:function(data){
+
+	        	if (data.success){
+	        		
+	        		var len = data.obj.length;
+	        		var obj = data.obj;
+	        		var str = "";
+	        		switch(len)
+	        		{
+	        		case 2:
+						str +='<div class="row">';
+						str +='<div class="col-md-6 col-sm-6">';
+						str +='<div class="all-pic pic-hover">';
+						str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[0].productId+'&type=1">';
+						str +='<img src="'+imgPath+obj[0].pic+'">';
+						str +='<h4>'+obj[0].name+'</h4>';
+						str +='<p>'+obj[0].model+'</p>';
+						str +='<em>';
+						str +='<div class="white f16">'+obj[0].name+'</div>';
+						str +='<div class="white f12">'+obj[0].model+'</div>';
+						str +='</em>';
+						str +='</a>';
+						str +='</div>';
+						str +='</div>';
+						str +='<div class="col-md-6 col-sm-6">';
+						str +='<div class="all-top">';
+						str +='<div class="all-pic pic-hover">';
+						str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[1].productId+'&type=1">';
+						str +='<img src="'+imgPath+obj[1].pic+'">';
+						str +='<h4>'+obj[1].name+'</h4>';
+						str +='<p>'+obj[1].model+'</p>';
+						str +='<em>';
+						str +='<div class="white f16">'+obj[1].name+'</div>';
+						str +='<div class="white f12">'+obj[1].model+'</div>';
+						str +='</em>';
+						str +='</a>';
+						str +='</div>';
+						str +='</div>';
+						str +='</div>';
+						str +='</div>';
+	        			$(".productDiv").html(str);
+	        		   	break;
+	        		case 3:
+	        			str +='<div class="row">';
+						str +='<div class="col-md-6  col-sm-6">';
+						str +='<div class="all-pic pic-hover">';
+						str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[0].productId+'&type=1">';
+						str +='<img src="'+imgPath+obj[0].pic+'">';
+						str +='<h4>'+obj[0].name+'</h4>';
+						str +='<p>'+obj[0].model+'</p>';
+						str +='<em>';
+						str +='<div class="white f16">'+obj[0].name+'</div>';
+						str +='<div class="white f12">'+obj[0].model+'</div>';
+						str +='</em>';
+						str +='</a>';
+						str +='</div>';
+						str +='</div>';
+						str +='<div class="col-md-6 col-sm-6">';
+						str +='<div class="all-pic pic-hover-last">';
+						str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[1].productId+'&type=1">';
+						str +='<img src="'+imgPath+obj[1].pic1+'">';
+						str +='<h4>'+obj[1].name+'</h4>';
+						str +='<em>';
+						str +='<div class="white f16">'+obj[1].name+'</div>';
+						str +='</em>';
+						str +='</a>';
+						str +='</div>';
+						str +='</div>';
+						str +='<div class="col-md-6 col-sm-6">';
+						str +='<div class="p-t-20">';
+						str +='<div class="all-pic pic-hover-last">';
+						str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[2].productId+'&type=1">';
+						str +='<img src="'+imgPath+obj[2].pic1+'">';
+						str +='<h4>'+obj[2].name+'</h4>';
+						str +='<em>';
+						str +='<div class="white f16">'+obj[2].name+'</div>';
+						str +='</em>';
+						str +='</a>';
+						str +='</div>';
+						str +='</div>';
+						str +='</div>';
+						str +='</div>';
+
+	        			$(".productDiv").html(str);
+	        		   	break;
+	        		case 4:
+	        		    str +='<div class="row">';
+	        		    str +='<div class="col-md-6 col-sm-6">';
+	        		    str +='<div class="p-b-20">';
+	        		    str +='<div class="all-pic pic-hover">';
+	        		    str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[0].productId+'&type=1">';
+	        		    str +='<img src="'+imgPath+obj[0].pic+'">';
+	        			str +='<h4>'+obj[0].name+'</h4>';
+	        			str +='<p>'+obj[0].model+'</p>';
+	        			str +='<em>';
+	        			str +='<div class="white f16">'+obj[0].name+'</div>';
+	        			str +='<div class="white f12">'+obj[0].model+'</div>';
+	        			str +='</em>';
+	        			str +='</a>';
+	        			str +='</div>';
+	        			str +='</div>';
+	        			str +='<div class="all-pic pic-hover-last">';
+	        			str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[1].productId+'&type=1">';
+	        			str +='<img src="'+imgPath+obj[1].pic1+'">';
+	        			str +='<h4>'+obj[1].name+'</h4>';
+	        			str +='<em>';
+	        			str +='<div class="white f16">'+obj[1].name+'</div>';
+	        			str +='</em>';
+	        			str +='</a>';
+	        			str +='</div>';
+	        			str +='</div>';
+	        			str +='<div class="col-md-6 col-sm-6">';
+	        			str +='<div class="all-pic all-top pic-hover-last">';
+	        			str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[2].productId+'&type=1">';
+	        			str +='<img src="'+imgPath+obj[2].pic1+'">';
+	        			str +='<h4>'+obj[2].name+'</h4>';
+	        			str +='<em>';
+	        			str +='<div class="white f16">'+obj[2].name+'</div>';
+	        			str +='</em>';
+	        			str +='</a>';
+	        			str +='</div>';
+	        			str +='<div class="p-t-20">';
+	        			str +='<div class="all-top">';
+	        			str +='<div class="all-pic pic-hover">';
+	        			str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[3].productId+'&type=1">';
+	        			str +='<img src="'+imgPath+obj[3].pic+'">';
+	        			str +='<h4>'+obj[3].name+'</h4>';
+	        			str +='<p>'+obj[3].model+'</p>';
+	        			str +='<em>';
+	        			str +='<div class="white f16">'+obj[3].name+'</div>';
+	        			str +='<div class="white f12">'+obj[3].model+'</div>';
+	        			str +='</em>';
+	        			str +='</a>';
+	        			str +='</div>';
+	        			str +='</div>';
+	        			str +='</div>';
+	        			str +='</div>';
+	        			str +='</div>';       			
+	        			$(".productDiv").html(str);
+	        		   	break;
+	        		case 5:
+	        			str +='<div class="row"><div class="col-md-6 col-sm-6">';	
+	        			str +='<div class="p-b-20"><div class="all-pic pic-hover"><a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[0].productId+'&type=1"><img src="'+imgPath+obj[0].pic+'"><h4>'+obj[0].name+'</h4><p>'+obj[0].model+'</p><em><div class="white f16">'+obj[0].name+'</div><div class="white f12">'+obj[0].model+'</div></em></a></div></div>';	
+	        			str +='<div class="all-pic pic-hover-last"><a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[1].productId+'&type=1"><img src="'+imgPath+obj[1].pic1+'"><h4>'+obj[1].name+'</h4><em><div class="white f16">'+obj[1].name+'</div></em></a></div></div>';	
+	        			str +='<div class="col-md-6 col-sm-6">';	
+	        			str +='<div class="all-top flex">';	
+	        			str +='<div class="all-pic p-r-10 pic-hover-last">';	
+	        			str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[2].productId+'&type=1">';	
+	        			str +='<img src="'+imgPath+obj[2].pic2+'">';	
+	        			str +='<h4>'+obj[2].name+'</h4>';	
+	        			str +='<em>';	
+	        			str +='<div class="white f16">'+obj[2].name+'</div>';	
+	        			str +='</em>';	
+	        			str +='</a>';	
+	        			str +='</div>';	
+	        			str +='<div class="all-pic  p-l-10 pic-hover-last">';	
+	        			str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[3].productId+'&type=1">';	
+	        			str +='<img src="'+imgPath+obj[3].pic2+'">';	
+	        			str +='<h4>'+obj[3].name+'</h4>';	
+	        			str +='<em>';	
+	        			str +='<div class="white f16">'+obj[3].name+'</div>';	
+	        			str +='</em>';	
+	        			str +='</a>';	
+						str +='</div>';	
+						str +='</div>';	
+						str +='<div class="p-t-20">';	
+						str +='<div class="all-pic pic-hover">';	
+						str +='<a href="${base}/QqsProduct/hardwareDetail.html?productId='+obj[4].productId+'&type=1">';	
+						str +='<img src="'+imgPath+obj[4].pic+'">';	
+						str +='<h4>'+obj[4].name+'</h4>';	
+						str +='<p>'+obj[4].model+'</p>';	
+						str +='<em>';	
+						str +='<div class="white f16">'+obj[4].name+'</div>';	
+						str +='<div class="white f12">'+obj[4].model+'</div>';	
+						str +='</em>';	
+						str +=' </a>';	
+						str +='</div>';	
+						str +='</div>';	
+						str +='</div>';	
+						str +='</div>';		        			
+	        			$(".productDiv").html(str);
+	        		   	break;
+	        		default:
+        		   		break;
+	        		}	        		
+        	           
+	                }else{
+	                  var n = noty({
+	                      text        : data.message,
+	                      type        : 'error',
+	                      dismissQueue: true,
+	                      layout      : 'topCenter',
+	                      theme       : 'relax',
+	                      timeout   : 1500
+	                  });
+	             }
+	        },
+	        error:function(data){
+	        	
+	        	alert('ajax错误');
+	        }
+	 });	 
+ }
+ //获取服务机构
+ function getShopData(id){
+	 $.ajax({
+			type:'post',
+	        traditional :true,
+	        url:'${base}/index/getShopData.json', 
+	        data:{id:id},
+	        success:function(data){
+
+	        	if (data.success){
+	        		
+	        		var str = ""; 
+        		    $.each(data.obj,function(n,entity) {   
+
+        	            str +='<div class="col-md-4 col-sm-6 p-t-10"><div class="mechanism flex"><div class="mechanism-left"><i class="iconfont icon-weixiuweibao"></i></div>';
+        	            str +='<div class="flex-one mechanism-center">';
+        	            str +='<div class="blue"><i class="iconfont icon-dianhua"></i>'+entity.tel+'</div>';
+        	            str +='<div class="one-text f16 p-t-6">'+entity.name+'</div>';
+        	            str +='<div class="f999 f12 p-t-6"><i class="iconfont icon-mingpian"></i>'+entity.userName+'</div>';
+        	            str +='</div>';
+        	            str +='<div class="mechanism-right blue">';
+        	            str +=' <a href="${base}/shop/shopDetail.html?id='+entity.id+' "><i class="iconfont icon-dizhi"></i></a>';
+        	            str +='</div></div></div>';     	             
+        	           });  
+        		    
+        	           $(".shopData").html(str);  
+        	           
+	                }else{
+	                  var n = noty({
+	                      text        : data.message,
+	                      type        : 'error',
+	                      dismissQueue: true,
+	                      layout      : 'topCenter',
+	                      theme       : 'relax',
+	                      timeout   : 1500
+	                  });
+	             }
+	        },
+	        error:function(data){
+	        	
+	        	alert('ajax错误');
+	        }
+	 });	 
+ }
+ //获取新闻
+ function getNewsData(id){
+	 $.ajax({
+			type:'post',
+	        traditional :true,
+	        url:'${base}/index/getNewsData.json', 
+	        data:{id:id},
+	        success:function(data){
+
+	        	if (data.success){
+	        		
+	        		var str = ""; 
+        		    $.each(data.obj,function(n,entity) {   
+        	             if(entity.picture){
+        	            	 pic = '${setting['files.contextpath']}'+entity.picture;
+        	             }else{
+        	            	 pic = '${base}/assets/images/ss1.jpg';
+        	             }
+        	             
+        	             str +='<div class="swiper-slide ">';
+       	            	 str +='<div class="grid">';
+     	                 str +='<figure class="effect-lily">';
+     	            	 str +='<img src="'+pic+'" alt="">';
+     	            	 str +='<figcaption>';
+     	            	 str +='<h4>'+entity.title+'</h4>';
+     	            	 str +='<p>'+entity.brief+'</p>';
+     	            	 str +='</figcaption><em></em>';
+     	            	 str +='</figure>';
+     	            	 str +='</div>';
+     	            	 str +='</div>';       	             
+        	           });  
+        		    
+        	           $(".newsData").html(str);  
+        	           
+        	           new Swiper('.swiper-container-new', {
+        	           	observer:true,//修改swiper自己或子元素时，自动初始化swiper 
+        	           	observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+        	               slidesPerView:4,
+        	               initialSlide:0,
+        	               spaceBetween: 0,
+        	               centeredSlides: true,
+        	               loop: true
+
+        	           })        	           
+												
+	                }else{
+	                  var n = noty({
+	                      text        : data.message,
+	                      type        : 'error',
+	                      dismissQueue: true,
+	                      layout      : 'topCenter',
+	                      theme       : 'relax',
+	                      timeout   : 1500
+	                  });
+	             }
+	        },
+	        error:function(data){
+	        	
+	        	alert('ajax错误');
+	        }
+	 });	 
+ }
+</script>
+</#escape>
+</@main.footer>

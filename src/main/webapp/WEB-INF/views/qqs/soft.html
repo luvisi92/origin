@@ -1,0 +1,80 @@
+<@main.header title="产品">
+<#escape x as x?html>
+    <style>
+        body {
+            background:#fff;
+        }
+    </style>
+</#escape>
+</@main.header>
+<@main.body>
+<!-- Swiper -->
+<div class="index-pic">
+    <img src="${base}/assets/images/cp2.jpg"/>
+</div>
+<!--幻灯片结束-->
+<div  class="clearfix"></div>
+<div class="container">
+    <div id="tab">
+        <div class="tab_menu">
+            <ul>
+            <#if categoryList?? && categoryList?size gt 0>
+            <#list categoryList as category>
+                <li <#if category.catId == selectCatId>class="selected"
+                    <#assign catName=category.catName>
+                    </#if> onclick="selectCategory('${(category.catId)!}')">
+                    ${(category.catName)!}
+                    <i class="iconfont icon-icon1"></i>
+                </li>
+            </#list>
+            </#if>
+            </ul>
+        </div>
+        <div class="tab_box">
+            <div class="row">
+                <div class="col-md-12 tab-top">
+                    <div class="bs-example">
+                    <form id="miniForm" action="${base}/QqsProduct/softDetail.html" method="post">
+                        <input type="hidden" name="type" value="${type!}">
+                        <input type="hidden" name="catName" value="${catName!}">
+                        <input type="hidden" name="selectCatId" value="${selectCatId!}">
+                        <input type="hidden" name="productId" value="">
+                    </form>
+                    <#if softProductList?exists && (softProductList?size gt 0)>
+                    <#list softProductList as entity>
+                        <div class="media m-t-50 media-link" >
+                            <div class="media-left media-img">
+                                <a href="###">
+                                    <img class="media-object" src="${setting['files.contextpath']}/${(entity.pic)!}">
+                                </a>
+                            </div>
+                            <div class="media-body b-b-e3 media-right">
+                                <h3 class="media-heading one-text bold media-title">${(entity.name)!}</h3>
+                                <div class="two-text p-t-20">${(entity.brief)!}
+                                </div>
+                                <p class="media-more"><a href="###" onclick="softDetail(${(entity.productId)!})">查看详情</a> </p>
+                            </div>
+                        </div>
+                    </#list>
+                    </#if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+    function selectCategory(catId) {
+        window.location.href = "${base}/QqsProduct/list.html?type=${type}&selectCatId=" + catId;
+    }
+    function softDetail(productId) {
+        $("input[name='productId']").val(productId);
+        $("#miniForm").submit();
+    }
+</script>
+</#escape>
+</@main.footer>

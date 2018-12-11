@@ -1,0 +1,78 @@
+<@main.header title="联系我们">
+  <#escape x as x?html>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  </#escape>
+      <link rel="stylesheet" href="${base}/assets/css/myStyle.css" type="text/css">
+</@main.header>
+<@main.body>
+  <#escape x as x?html>
+    <div class="container-fluid column-01">
+      <figure class="fixedratio-01 fixedratio-04" style="position: relative;">
+        <div class="row">
+          <div class="col-md-5 col-md-offset-7 col-sm-6 col-sm-offset-6 col-xs-9 col-xs-offset-3 img01-words img04-words left-160">
+            <h1>安防服务</h1>
+            <h4>Security service</h4>
+            <p>基于百度安全部门丰富的技术和经验，提供DDOS防护，云服务器防护，漏洞扫描等安全功能，保障客户业务系统稳定运行</p>
+          </div>
+        </div>  
+      </figure>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 text-center intro-title">联系我们</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 add">
+          <!-- <h4>公司地址</h4> -->
+          <p>总部地址：</p>
+          <p>深圳市福田区红荔西路香蜜湖娱乐城南门A1栋</p>
+          <p style="margin-top: 10px;">服务中心：</p>
+          <p>深圳市龙岗区锦龙大道2号精华中工业园1栋</p>
+          <p style="margin-top: 10px;">研发中心：</p>
+          <p>合肥市天智路5号同创科技园1栋</p>
+          <p style="margin-top: 10px;">联系我们：</p>
+          <p>0755-83159999</p>
+          <!-- <p>传真：0755-12345678</p>
+          <h4 style="padding-top: 20px;">分公司</h4>
+          <p>联系电话：400-1816-110</p> -->
+          <br>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div id="map" style="width:100%;height:300px;">
+          </div>
+        </div>
+      </div><br><br>
+    </div>
+  </#escape>
+</@main.body>
+<@main.footer>
+<script>
+  var ak = 'Y5brUY2qCrIjpehmh0CEQ4THLsiyY1Ti';
+  var map;
+  var point;
+  //百度地图API功能
+  function loadJScript() {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://api.map.baidu.com/api?v=2.0&ak=" + ak + "&callback=init";
+    document.body.appendChild(script);
+  }
+  function init() {
+    var lng = "114.037184";
+    var lat = "22.550137";
+    map = new BMap.Map("map");                    // 创建Map实例
+    point = new BMap.Point(lng,lat);              // 创建点坐标
+    map.centerAndZoom(point,15);                  // 初始化地图,设置中心
+    map.addControl(new BMap.NavigationControl()); //增加平移缩放控件 
+    //map.enableScrollWheelZoom();                  //启用滚轮放大缩小
+    
+    var marker = new BMap.Marker(point);          // 创建标注
+    map.addOverlay(marker);                       // 将标注添加到地图中
+
+  }
+  //异步加载地图
+  window.onload = loadJScript;
+</script>
+</@main.footer>

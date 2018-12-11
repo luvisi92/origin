@@ -1,0 +1,661 @@
+<@main.header title="首页">
+<#escape x as x?html> 
+<script>
+	var imgPath = '${setting['files.contextpath']}';
+</script>	
+<style>
+    .swiper-container {
+            width: 100%;
+            height: 100%;
+            position: static;
+            top:0
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .swiper-button-next-fw, .swiper-button-prev-fw {
+            position: absolute;
+           bottom:-24px!important;
+            width: 27px;
+            height:20px;
+            z-index: 10;
+            cursor: pointer;
+            background-size: 27px 44px;
+            background-position: center;
+            background-repeat: no-repeat
+        }
+
+        .swiper-button-next-fw.swiper-button-disabled, .swiper-button-prev-fw.swiper-button-disabled {
+            opacity: .35;
+            cursor: auto;
+            pointer-events: none
+        }
+
+        .swiper-button-prev-fw, .swiper-container-rtl .swiper-button-next-fw {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+            left: 10px;
+            right: auto
+        }
+
+        .swiper-button-next-fw, .swiper-container-rtl .swiper-button-prev-fw {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+            left: 10px;
+            left: auto
+        }
+    
+    #allmap {height: 420px;width:100%;overflow: hidden;}
+	#result {width:100%;font-size:12px;}
+</style>
+</#escape> 
+
+</@main.header>
+<@main.body>
+<#escape x as x?html> 
+<form id="myFormId" method="post">
+<input type="hidden" name="code" id="code"/>
+<div class="index-pic">
+  	<img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+</div>
+
+<div class="clearfix"></div>
+<div class="container p-t-60">
+    <div class="bgfff">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="pd30 f22">
+                    <i class="iconfont icon-dizhi"> </i>  <span id="province" class="blue"><span id="provinceId">全部</span><span>-</span><span id="cityId">全部</span></span>   附近共有<span class="blue" id="companyNum">2</span>个服务机构
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="dropdown-add">
+                    <div class="dropdown">
+                        <select id="selectId1" onchange="changeSelect(this)">
+                        <#if list?? && list?size gt 0> 
+							<#list list as list>
+	                  			<option class="optionClass" value="${(list.code)}_${(list.localName)}" text='${(list.localName)}'>${(list.localName)}</option>
+							</#list> 
+						</#if>
+                        </select>
+                    </div>
+                    <div class="dropdown">
+                    	<div class = "appendDiv"></div>
+                        <select id="selectId2" onchange="cityClick(this)">
+                            <option id= "optCityId" value="" >市</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container m-t-20">
+    <div class="bgfff map30"  style="padding-bottom: 30px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div style="width:100%;">
+                    <div class="swiper-container" id="swiperId">
+                        <div class="swiper-wrapper" id="shopList">
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination t-right" style="padding-right: 20px;bottom:-18px!important;"></div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next-fw"></div>
+                        <div class="swiper-button-prev-fw"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="all-pic map-top">
+                <div id="allmap">	
+				</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="container p-t-60">
+    <div class="tj-text">
+        <h1>推荐机构</h1>
+    </div>
+    <div class="row">
+    
+    <#if recommendList?? && recommendList?size gt 0> 
+		<#list recommendList as list>
+        <div class="col-md-4 col-sm-6 p-t-10">
+            <div class="mechanism flex">
+                <div class="mechanism-left">
+                    <i class="iconfont icon-weixiuweibao"></i>
+                </div>
+                <div class="flex-one mechanism-center">
+                    <div class="blue"><i class="iconfont icon-dianhua"></i>${list.tel} </div>
+                    <div class="one-text f16 p-t-6">${list.name}</div>
+                    <div class="f999 f12 p-t-6"><i class="iconfont icon-mingpian"></i> ${list.id}${list.userName}</div>
+                </div>
+                <div class="mechanism-right blue">
+                    <a href = "${base}/shop/shopDetail.html?id=${list.id}" target ="_blank">
+                    <i class="iconfont icon-dizhi"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+       	</#list> 
+	</#if>
+    </div>
+</div> 
+</form>
+</#escape> 
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<link rel="stylesheet" href="${base}/assets/select2/select2.min.css">
+<script src="${base}/assets/select2/select2.full.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Y5brUY2qCrIjpehmh0CEQ4THLsiyY1Ti"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+<script>
+	//初始化
+	$(function(){
+		locationMap();
+	})
+
+	
+	function selectBaiDu(id){
+		var param = {};
+		param.id = id;
+		$.ajax({  
+	        type:'post',  
+	        traditional :true,  
+	        url:'${base}/shop/getLatCity.json',  
+	        data:param,
+	        success:function(data){	        
+	        	switch(data.code){
+	        	case 401:
+	        		window.location.href = data.message;
+        			break;
+        		default:
+	        			if(data.success){ 
+				            var content = "";
+				            var latCityList = data.obj;
+				            if(latCityList != null && latCityList.length != 0) { 
+				            	var content ="";
+				        	    for(var i=0;i<latCityList.length;i++){
+				        	        var entity = latCityList[i];
+				        	        var lng = entity.lng;//经度
+				        	        var lat = entity.lat;//纬度
+				        	        var name = entity.name;//公司名
+				        	        var tel = entity.tel;//联系电话
+				        	        var address = entity.address;//地址
+				        	        content = '<div style="margin:0;line-height:20px;padding:2px;">'+ name +'<br/>'+ address +'<br/>'+ tel +'</div>';
+				        	        //+'<span><a href = "/qqs/shopDetail.html?id='+ id +' ">门店详情</a> <i class="iconfont icon-icon1"></i> </span>';
+				        	    }
+				        	    baiduMap(lng,lat,content);
+				            }
+				        }else {
+			        		var n = noty({
+					            text        : data.message,
+					            type        : 'success',
+					            dismissQueue: true,
+					            layout      : 'topCenter',
+					            theme       : 'relax',
+					            timeout		: 1500,
+					            callback: {     // 设置回调函数
+							        afterClose: function() {
+							        }
+						    	}
+					        });
+				        }
+	        	}
+	        },
+	        error:function(data){
+        		var n = noty({
+		            text        : 'ajax错误',
+		            type        : 'success',
+		            dismissQueue: true,
+		            layout      : 'topCenter',
+		            theme       : 'relax',
+		            timeout		: 1500,
+		            callback: {     // 设置回调函数
+				        afterClose: function() {
+				        }
+			    	}
+		        });
+	        }
+    	});
+	  }
+	
+	
+	//根据城市名称查询该城市下机构
+	function locationCityShop(city){
+		var param = {};
+    	param.city = city;
+		$.ajax({
+	         type: "POST",
+		  	 traditional :true,  
+		     url:'${base}/shop/locationMap.json',  
+		     data:param,
+	         success:function(data){	
+		            if(data.success){ 
+			            var content = "";
+			            var cityShopList = data.obj;
+			            nums = cityShopList.length;
+		            	$("#nums").val(nums);
+			            if(cityShopList != null && cityShopList.length != 0) { 
+			                $("#appendId").html(getCompanyHtml(cityShopList));
+			                //初始查询城市列表下机构默认展示第一个地图位置
+			                $("#ulId").find("li:first").click();
+			            }else{
+			            	removeCompany();
+			            	num=0;
+			            	$("#companyNum").html(num);
+			            }
+			        }else {
+		        		var n = noty({
+				            text        : data.message,
+				            type        : 'success',
+				            dismissQueue: true,
+				            layout      : 'topCenter',
+				            theme       : 'relax',
+				            timeout		: 1500,
+				            callback: {     // 设置回调函数
+						        afterClose: function() {
+						        }
+					    	}
+				        });
+			        }
+	         },
+	         error:function(data){
+	        		var n = noty({
+			            text        : 'ajax错误',
+			            type        : 'success',
+			            dismissQueue: true,
+			            layout      : 'topCenter',
+			            theme       : 'relax',
+			            timeout		: 1500,
+			            callback: {     // 设置回调函数
+					        afterClose: function() {
+					        }
+				    	}
+			        });
+	         }		     
+	    });
+	  }
+		
+
+
+
+	//百度地图--------------------------------------------------------------
+	//选择机构根据经纬度标识地图上所在位置
+	function baiduMap(lng,lat,content){
+    var map = new BMap.Map('allmap');
+    var poi = new BMap.Point(lng,lat);
+    map.centerAndZoom(poi, 16);
+    
+  	//滑轮改变地图大小
+    //map.enableScrollWheelZoom();
+
+    //创建检索信息窗口对象
+    var searchInfoWindow = null;
+	var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+		title: "全球安", //标题
+		width: 290, //宽度
+		height: 105, //高度
+		panel : "panel", //检索结果面板
+		enableAutoPan : true, //自动平移
+		searchTypes :[
+		]
+	});
+	
+    var marker = new BMap.Marker(poi); //创建marker对象（红点标识）
+    if(marker != null && marker != ""){
+    searchInfoWindow.open(marker);
+    }
+    //marker.enableDragging(); //marker可拖拽（选择其他地方标识可移动）
+    $(".BMapLib_sendToPhone").remove();
+  	//打开标记处信息
+    marker.addEventListener("click", function(e){
+	searchInfoWindow.open(marker);
+    }) 
+    map.addOverlay(marker); //在地图中添加marker（红点标识）
+	}
+	
+	//百度地图定位--------------------------------------------------------------
+	//自动定位当前所在城市
+	function locationMap(){
+		 var map = new BMap.Map("allmap");
+		var point = new BMap.Point(116.331398,39.897445);
+		map.centerAndZoom(point,12);
+		var geolocation = new BMap.Geolocation();
+		var myGeo = new BMap.Geocoder(); 
+		
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				var mk = new BMap.Marker(r.point);
+		   		var pt = r.point; 
+				map.addOverlay(mk);
+				map.panTo(r.point);
+				myGeo.getLocation(pt, function(result){    
+					if (result){    
+					  var addComp = result.addressComponents;
+					  var province = addComp.province;
+					  var city = addComp.city
+					  $("#provinceId").html(province);
+					  $("#cityId").html(city);
+					  
+					  $("#selectId1").find("option[text='"+province+"']").attr("selected",true);
+					  selectCity(province);
+					  $("#selectId2").find("option[text='"+city+"']").attr("selected",true);
+					}
+					locationCityShop(city);
+					}); 
+			}
+			else {
+			}        
+		},{enableHighAccuracy: true})
+	}
+	//百度地图--------------------------------------------------------------
+	$("#selectId").select2();
+	
+	//选择省查找市
+	function changeSelect(obj){
+    	var str = $(obj).val();
+    	var code = str.substring(0,6);
+    	var province = str.substring(7);
+		$("#provinceId").html(province);
+       	//根据省查找市
+       	queryCodeList(code);
+	}
+	
+	
+	//选择省获取市的列表
+	   function queryCodeList(code){
+		    if(!code||code<0){
+		    	return false;
+		    }
+	    	var param = {};
+	    	param.code = code;
+	    	$.ajax({  
+		        type:'post',  
+		        traditional :true,  
+		        url:'${base}/shop/getCity.json',  
+		        data:param,
+		        success:function(data){	        
+		        	switch(data.code){
+		        	case 401:
+		        		window.location.href = data.message;
+	        			break;
+	        		default:
+		        			if(data.success){ 
+					            var content = "";
+					            var cityList = data.obj;
+					            if(cityList != null && cityList.length != 0) { 
+					            	var codeStr = cityList[0].code;
+					            	var nameStr = cityList[0].localName;
+					            	var content ="";
+					         	  
+					        	    for(var i=0;i<cityList.length;i++){
+					        	        var entity = cityList[i];
+					        	        var code = entity.code;
+					        	        var localName = entity.localName;
+					        	        	content+='<option class="optionClass"  value="' + code +"_"+ localName +'" text="'+ localName +'">'+ localName + '</option>';
+					        	    }
+					                $("#selectId2").html(content);
+					                companyList(codeStr);
+					                $("#cityId").html(nameStr);
+					            }
+					        }else {
+				        		var n = noty({
+						            text        : data.message,
+						            type        : 'success',
+						            dismissQueue: true,
+						            layout      : 'topCenter',
+						            theme       : 'relax',
+						            timeout		: 1500,
+						            callback: {     // 设置回调函数
+								        afterClose: function() {
+								        }
+							    	}
+						        });
+					        }
+		        	}
+		        },
+		        error:function(data){
+	        		var n = noty({
+			            text        : 'ajax错误',
+			            type        : 'success',
+			            dismissQueue: true,
+			            layout      : 'topCenter',
+			            theme       : 'relax',
+			            timeout		: 1500,
+			            callback: {     // 设置回调函数
+					        afterClose: function() {
+					        }
+				    	}
+			        });
+		        }
+	    	});
+		  }
+	
+	 //选择省获取市的列表
+	   function selectCity(province){
+		    if(!province||province<0){
+		    	return false;
+		    }
+	    	var param = {};
+	    	param.province = province;
+	    	$.ajax({  
+		        type:'post',  
+		        traditional :true,  
+		        url:'${base}/shop/selectCity.json',  
+		        data:param,
+		        success:function(data){	        
+		        	switch(data.province){
+		        	case 401:
+		        		window.location.href = data.message;
+	        			break;
+	        		default:
+		        			if(data.success){ 
+					            var content = "";
+					            var cityList = data.obj;
+					            if(cityList != null && cityList.length != 0) { 
+					            	var codeStr = cityList[0].code;
+					            	var nameStr = cityList[0].localName;
+					            	var content ="";
+					         	  
+					        	    for(var i=0;i<cityList.length;i++){
+					        	        var entity = cityList[i];
+					        	        var code = entity.code;
+					        	        var localName = entity.localName;
+					        	        	content+='<option class="optionClass"  value="' + code +"_"+ localName +'" text="'+ localName +'">'+ localName + '</option>';
+					        	    }
+					                $("#selectId2").html(content);
+					                companyList(codeStr);
+					                $("#cityId").html(nameStr);
+					            }
+					        }else {
+				        		var n = noty({
+						            text        : data.message,
+						            type        : 'success',
+						            dismissQueue: true,
+						            layout      : 'topCenter',
+						            theme       : 'relax',
+						            timeout		: 1500,
+						            callback: {     // 设置回调函数
+								        afterClose: function() {
+								        }
+							    	}
+						        });
+					        }
+		        	}
+		        },
+		        error:function(data){
+	        		var n = noty({
+			            text        : 'ajax错误',
+			            type        : 'success',
+			            dismissQueue: true,
+			            layout      : 'topCenter',
+			            theme       : 'relax',
+			            timeout		: 1500,
+			            callback: {     // 设置回调函数
+					        afterClose: function() {
+					        }
+				    	}
+			        });
+		        }
+	    	});
+		  }
+		
+	
+	 //获取市的code
+       function cityClick(element){
+       	var str = $(element).val();
+           var code = str.substring(0,6);
+       	var city = str.substring(7);
+   		$("#cityId").html(city);
+           //查询规格列表
+           companyList(code);
+       }
+	 
+	
+     //选取市获取城市下的所有店铺
+   	function companyList(code){
+       	var param = {};
+       	param.code = code;
+   		$.ajax({
+   	         type: "POST",
+   		  	 traditional :true,  
+   		     url:'${base}/shop/getCityCompany.json',  
+   		     data:param,
+   	         success:function(data){	
+   		            if(data.success){ 
+   			            var content = "";
+   			            var shopList = data.obj;
+   			            nums = shopList.length;
+   		            	$("#nums").val(nums);
+   			            if(shopList != null && shopList.length != 0) { 
+   			            	$("#swiperId").show();
+   			                $("#shopList").html(getCompanyHtml(shopList));
+   			                //初始查询城市列表下机构默认展示第一个地图位置
+   			        		$("#ulId").find("li:first").click();
+   			            }else{
+   			            	removeCompany();
+   			            	num=0;
+   			            	$("#companyNum").html(num);
+   			            }
+   			        }else {
+		        		var n = noty({
+				            text        : data.message,
+				            type        : 'success',
+				            dismissQueue: true,
+				            layout      : 'topCenter',
+				            theme       : 'relax',
+				            timeout		: 1500,
+				            callback: {     // 设置回调函数
+						        afterClose: function() {
+						        }
+					    	}
+				        });
+   			        }
+   	         },
+   	         error:function(data){
+	        		var n = noty({
+			            text        : "查询出错",
+			            type        : 'success',
+			            dismissQueue: true,
+			            layout      : 'topCenter',
+			            theme       : 'relax',
+			            timeout		: 1500,
+			            callback: {     // 设置回调函数
+					        afterClose: function() {
+					        }
+				    	}
+			        });
+   	         }		     
+   	    });
+       
+   	}
+	
+	 function removeCompany(){
+		$("#swiperId").hide();
+	} 
+    
+	 function getCompanyHtml(shopList){
+		    var content ='';
+		    num = shopList.length;
+		    $("#companyNum").html(num);
+		     for(var i=0;i<shopList.length;i++){
+		    	var index = i;
+		        var entity = shopList[i];
+		        var name = entity.name;
+		        if(name.length > 14){
+		        name = name.substring(0,14)+"...";
+		        }
+		        var address = entity.address;
+		        var tel = entity.tel;
+		        var id = entity.id;
+	            
+		        if((index+1) % 5 == 1){
+		        	content+='<div class="swiper-slide">';
+		        	content+='<div class="map-list">';
+		        	content+='<ul id="ulId" class="ulClass">';
+		        } 
+		        content+='<li class="" value ="'+id+'" onclick="selectBaiDu('+id+')">';
+		        content+='<div class="map-list-number">';
+		        content+='<span>'+(index+1)+'</span>';
+		        content+=' </div>';
+		        content+='<div class="t-left map-list-right">';
+		        content+='<p class="one-text f14">'+ name +'</p>';
+		        content+='<p class="one-text f14">'+ address +'</p>';
+		        content+='<p class="f14 blue"><i class="iconfont icon-dianhua"></i>'+ tel +'</p>';
+		        content+='<span><a href = "${base}/shop/shopDetail.html?id='+ id +' " target ="_blank">门店详情</a> <i class="iconfont icon-icon1"></i> </span>';
+		        content+='</div>';
+		        content+='</li>';
+		        if((index+1) % 5 == 0){
+		            content+='</ul>';
+		            content+='</div>';
+		            content+='</div>';
+		        }
+		    }
+		    
+		    return content;
+		}
+	
+	
+
+	
+    var swiper = new Swiper('.swiper-container', {
+    	observer:true,//修改swiper自己或子元素时，自动初始化swiper 
+    	observeParents:true,//修改swiper的父元素时，自动初始化swiper 
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+            
+        },
+        navigation: {
+            nextEl: '.swiper-button-next-fw',
+            prevEl: '.swiper-button-prev-fw',
+        },
+    });
+    
+    $("#swiperId").show();
+    
+</script>
+</#escape>
+</@main.footer>

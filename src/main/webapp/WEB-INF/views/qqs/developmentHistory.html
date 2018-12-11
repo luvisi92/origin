@@ -1,0 +1,66 @@
+<@main.header title="关于我们">
+<#escape x as x?html> 
+<script>
+	var imgPath = '${setting['files.contextpath']}';
+</script>	
+    <style>
+        body {
+            background:#fff;
+        }
+    </style>
+</#escape> 
+</@main.header>
+<@main.body>
+<div class="all-height"></div>
+<div class="all-pic">
+   	<img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+</div>
+
+<div class="container-fluid">
+    <div class="pb60">
+        <div class="container">
+            <h4>全球安发展介绍</h4>
+            
+            <p class="p-t-30">我们提供在公司安防、互联网、新兴智能科技等领域的解决方案，我们提供在公司安防、互联网、新兴智能科技等领域的解决方案我们提供在公司安防、互联网、新兴智能科技等领域的解决方案我们提供在公司安防互联网新兴智能科技等领域的解决方案，我们提供在公司安防、互联网、新兴智能科技等领域的解决方案我们提供在公司安防。</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid top-border">
+    <div class="pb30">
+        <div class="container">
+            <h4>发展历程</h4>
+            <#list yearList as year>
+            <h4 class="bold p-t-30">${(year.year)!}</h4>
+            <p>${(year.comment)!}</p>
+            <div class="p-t-30">
+                <div class="panel-group fz"  role="tablist" aria-multiselectable="true">
+                	<#list map[year.year] as entity>                	
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent=".fz" href="#collapseOne${(year.year)!}${(entity.month)!}" aria-expanded="false" aria-controls="collapseOne">
+                                     ${(entity.month)!}月  ${(entity.title)!}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne${(year.year)!}${(entity.month)!}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                	${(entity.comment)!}
+                            </div>
+                        </div>
+                    </div>
+                    </#list>
+                  </div>
+              </div>
+              </#list>
+        </div>
+    </div>
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+</script>
+</#escape>
+</@main.footer>

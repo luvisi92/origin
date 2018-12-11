@@ -1,0 +1,107 @@
+<@main.header title="首页">
+<#escape x as x?html> 
+<script>
+	var imgPath = '${setting['files.contextpath']}';
+</script>	
+    <style>
+        body {
+            background:#fff;
+        }
+    </style>
+</#escape> 
+</@main.header>
+<@main.body>
+<!-- Swiper -->
+<div class="index-pic">
+		<img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+</div>
+<!--幻灯片结束-->
+<div  class="clearfix"></div>
+<div class="container">
+    <div id="tab">
+        <div class="tab_menu">
+            <ul>
+            	<#if categoryList??&&categoryList?size gt 0>
+            		<#list categoryList as category>
+            			<li class="<#if type=='${category.id}'>selected</#if>" onclick="changeCategory(${category.id!});">${category.name!}<i class="iconfont icon-icon1"></i> </li>
+            		</#list>
+            	</#if>
+            </ul>
+        </div>
+        <div class="tab_box">
+            <div class="row">
+                <div class="col-md-12 tab-top">
+                    <div class="bs-example">
+					<#if solutionList??&&solutionList?size gt 0>
+					<#list solutionList as entity>  
+                        <div class="media m-t-50 media-link" >
+                            <div class="media-left media-img">
+                                <a href="#">
+                                    <img class="media-object" src="<#if (entity.coverImg)?? && entity.coverImg != ''>${setting['files.contextpath']}${(entity.coverImg)!}</#if>">
+                                </a>
+                            </div>
+                            <div class="media-body b-b-e3 media-right">
+                                <h3 class="media-heading one-text bold media-title">${entity.name!}</h3>
+                                <div class="two-text p-t-20">
+                                   		 ${entity.brief!}
+                                </div>
+                                <p class="media-more"><a href="${base}/QqsSolution/detail.html?id=${entity.id!}">查看详情</a> </p>
+                            </div>
+                        </div>
+                        </#list>
+                    </#if>    
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+function changeCategory(id){
+	$.ajax({
+        type: "post",
+        url: "${base}/QqsSolution/getSolution.json",
+        dataType: "json",
+        data:{"categoryId":id},
+        success: function(data){
+        		 	if(data.success){
+        		 	var solutionArr = data.obj;
+        		 	getSolutionHTML(solutionArr);
+        		 	}
+                 },
+        error:function(){
+        }
+    });
+}
+
+function getSolutionHTML(solutionArr){
+	var htmlContent = "";
+	$(solutionArr).each(function(){
+		var entity = this;
+		var pic;
+		if(entity.coverImg){
+			pic = imgPath+"/"+entity.coverImg;
+		}
+		var url = "${base}/QqsSolution/detail.html?id="+entity.id;
+		htmlContent += '<div class="media m-t-50 media-link" >';
+		htmlContent += '<div class="media-left media-img">';
+		htmlContent += '<a href="#">';
+		htmlContent += '<img class="media-object" src="'+pic+'">';
+		htmlContent += '</a>';
+		htmlContent += '</div>';
+		htmlContent += '<div class="media-body b-b-e3 media-right">';
+		htmlContent += '<h3 class="media-heading one-text bold media-title">'+entity.name+'</h3>';
+		htmlContent += '<div class="two-text p-t-20">'+entity.name+'</div>';
+		htmlContent += '<p class="media-more"><a href="'+url+'">查看详情</a> </p>';
+		htmlContent += '</div>';
+		htmlContent += '</div>';				
+	});
+	$('.bs-example').html(htmlContent);
+}
+
+</script>
+</#escape>
+</@main.footer>

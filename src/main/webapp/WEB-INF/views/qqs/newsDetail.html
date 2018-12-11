@@ -1,0 +1,115 @@
+<@main.header title="首页">
+<#escape x as x?html>
+<script>
+    var imgPath = '${setting['files.contextpath']}';
+</script>
+</#escape>
+</@main.header>
+<@main.body>
+<!--产品详情-->
+<div class="container project-detailed">
+    <div class="row">
+        <div class="col-md-6 f16">
+            <div class="nav-bread">
+                <ul>
+                    <li <#if entity.type==1>class="news-cur"</#if>><a href="${base}/QqsNews/news.html?type=1">新闻中心</a></li>
+                    <li <#if entity.type==2>class="news-cur"</#if>><a href="${base}/QqsNews/news.html?type=2">企业资讯</a></li>                    
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb nav-bread-list" style="padding-left: 0;">
+            	<#if entity.type==1>
+            	<li><a href="${base}/QqsNews/news.html?type=${entity.type!}">新闻中心</a></li>
+            	<#else>
+            	<li><a href="${base}/QqsNews/news.html?type=${entity.type!}">企业资讯</a></li>
+            	</#if>
+                <li class="active">新闻详情</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="bgfff">
+                <div class="article">
+                    <h2>${entity.title!}</h2>
+                    <div class="f999 f14 p-t-10">${entity.reading!0}阅读 ${(entity.publishTime!)?string('yyyy-MM-dd')}</div>
+                    <div class="p-t-20 f16" style="line-height: 30px;">${entity.comment!}</div>
+                </div>
+            </div>
+            <div class="bgfff m-t-20 pd30">
+                <div class="row">
+                	<#if previousNews??>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="active-but">
+                            <a href="${base}/QqsNews/detail.html?id=${previousNews.newsId!}">上一篇</a>
+                        </div>
+                        <p class="p-t-20">
+                            <a href="${base}/QqsNews/detail.html?id=${previousNews.newsId!}">${previousNews.title!}</a>
+                        </p>
+                    </div>
+                    <#else>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="active-but">
+                            <a href="###">上一篇</a>
+                        </div>
+                        <p class="p-t-20">
+                            <a href="###"></a>
+                        </p>
+                    </div>                    
+                    </#if>
+                    <#if nextNews??>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="active-but active-but-r">
+                            <a href="${base}/QqsNews/detail.html?id=${nextNews.newsId!}">下一篇 </a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <p class="p-t-20 active-but-t">
+                            <a href="${base}/QqsNews/detail.html?id=${nextNews.newsId!}">${nextNews.title!}</a>
+                        </p>
+                    </div>                    
+                    <#else>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="active-but active-but-r">
+                            <a href="###">下一篇 </a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <p class="p-t-20 active-but-t">
+                            <a href="###"></a>
+                        </p>
+                    </div>
+                    </#if>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 all-top">
+            <div class="bgfff active-title">
+                <h3 class="">最新新闻</h3>
+                <div class="lf-newest">
+                    <div class="newest-lists" style="height: 305px; overflow: hidden;">
+                        <ul>
+                        	<#if qqsNewsList??&&qqsNewsList?size gt 0>
+	                        	<#list qqsNewsList as entity>
+	                            <li class="list_item">
+	                                <span class="line"></span>
+	                                <a href="${base}/QqsNews/detail.html?id=${entity.newsId!}">
+	                                    <p class="nl-title">${entity.title!}</p>
+	                                </a>
+	                            </li>	                        		
+	                        	</#list>
+                        	</#if>        
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+</script>
+</#escape>
+</@main.footer>

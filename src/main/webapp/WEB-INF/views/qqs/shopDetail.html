@@ -1,0 +1,177 @@
+<@main.header title="机构详情">
+<#escape x as x?html> 
+<style>
+ 	#allmap {height: 420px;width:100%;overflow: hidden;}
+	#result {width:100%;font-size:12px;}
+</style>
+</#escape> 
+</@main.header>
+<@main.body>
+<#escape x as x?html> 
+
+<div class="clearfix"></div>
+<div class="all-box" ></div>
+<div class="container ">
+ 	<#if shopsList?? && shopsList?size gt 0> 
+	<#list shopsList as list>
+    <div class="bgfff map30">
+        <div class="row">
+            <div class="col-md-4">
+                <div style="width:100%;">
+                   	<div class="f22">${list.name}</div>
+                    <div class="f14 p-t-10">地址：${list.address}</div>
+                    <div class="f14">联系电话：${list.tel}</div>
+                    <div class="f14">营业时间：${list.businessHoursStart}-${list.businessHoursStart}</div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="all-pic map-top">
+                    <div id="allmap">	
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+   	</#list> 
+	</#if>
+    
+</div>
+
+<div class="container p-t-60 ">
+    <div class="bgfff pd30">
+        <div class="tj-text">
+            <h1>门店支持服务</h1>
+        </div>
+        <div class="shop-list">
+            <ul>
+            <#if supportList?? && supportList?size gt 0> 
+				<#list supportList as list>
+                <li>
+                   <#noescape>${list.logo}</#noescape>
+                    <p><a href="###">${list.name}</a> </p>
+                </li>
+                </#list> 
+			</#if>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</#escape> 
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Y5brUY2qCrIjpehmh0CEQ4THLsiyY1Ti"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+<script>
+	$(function(){
+		selectBaiDu('${id!}');
+	});
+
+	function selectBaiDu(id){
+		console.log(id);
+
+		var param = {};
+		param.id = id;
+		$.ajax({  
+	        type:'post',  
+	        traditional :true,  
+	        url:'${base}/shop/getLatCity.json',  
+	        data:param,
+	        success:function(data){	        
+	        	switch(data.code){
+	        	case 401:
+	        		window.location.href = data.message;
+	    			break;
+	    		default:
+	        			if(data.success){ 
+				            var content = "";
+				            var latCityList = data.obj;
+				            if(latCityList != null && latCityList.length != 0) { 
+				            	//var latCityList = latCityList[0];
+				            	var content ="";
+				        	    for(var i=0;i<latCityList.length;i++){
+				        	        var entity = latCityList[i];
+				        	        var lng = entity.lng;//经度
+				        	        var lat = entity.lat;//纬度
+				        	        var name = entity.name;//公司名
+				        	        var tel = entity.tel;//联系电话
+				        	        var address = entity.address;//地址
+				        	        content = '<div style="margin:0;line-height:20px;padding:2px;">'+ name +'<br/>'+ address +'<br/>'+ tel +'</div>';
+				        	        //+'<span><a href = "/qqs/shopDetail.html?id='+ id +' ">门店详情</a> <i class="iconfont icon-icon1"></i> </span>';
+				        	    }
+				        	    baiduMap(lng,lat,content);
+				            }
+				        }else {
+			        		var n = noty({
+					            text        : data.message,
+					            type        : 'success',
+					            dismissQueue: true,
+					            layout      : 'topCenter',
+					            theme       : 'relax',
+					            timeout		: 1500,
+					            callback: {     // 设置回调函数
+							        afterClose: function() {
+							        }
+						    	}
+					        });
+				        }
+	        	}
+	        },
+	        error:function(data){
+        		var n = noty({
+		            text        : 'ajax错误',
+		            type        : 'success',
+		            dismissQueue: true,
+		            layout      : 'topCenter',
+		            theme       : 'relax',
+		            timeout		: 1500,
+		            callback: {     // 设置回调函数
+				        afterClose: function() {
+				        }
+			    	}
+		        });
+	        }
+		});
+	  }
+
+
+
+		//百度地图--------------------------------------------------------------
+		// 百度地图API功能
+		function baiduMap(lng,lat,content){
+		var map = new BMap.Map('allmap');
+		var poi = new BMap.Point(lng,lat);
+		map.centerAndZoom(poi, 16);
+		
+		//创建检索信息窗口对象
+		var searchInfoWindow = null;
+		var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+			title: "全球安", //标题
+			width: 290, //宽度
+			height: 105, //高度
+			panel : "panel", //检索结果面板
+			enableAutoPan : true, //自动平移
+			searchTypes :[
+			]
+		});
+		
+		var marker = new BMap.Marker(poi); //创建marker对象（红点标识）
+	    if(marker != null && marker != ""){
+	    searchInfoWindow.open(marker);
+	    }
+	    //marker.enableDragging(); //marker可拖拽（选择其他地方标识可移动）
+	    $(".BMapLib_sendToPhone").remove();
+	  	//打开标记处信息
+	    marker.addEventListener("click", function(e){
+		searchInfoWindow.open(marker);
+	    }) 
+	    map.addOverlay(marker); //在地图中添加marker（红点标识）
+		}
+		
+		//百度地图--------------------------------------------------------------
+
+</script>
+</#escape>
+</@main.footer>

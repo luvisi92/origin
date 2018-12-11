@@ -1,0 +1,57 @@
+<@main.header title="新闻中心">
+<#escape x as x?html> 
+<script>
+	var imgPath = '${setting['files.contextpath']}';
+</script>	
+</#escape> 
+</@main.header>
+<@main.body>
+<!--产品详情-->
+<div class="container project-detailed">
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb nav-bread-list" style="padding-left: 0;">
+                <li><a href="${base}/AboutUs/aboutUs.html">关于我们</a></li>
+                <li>服务支持</li>
+                <li class="active">${support.name!}</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-9">
+            <div class="bgfff">
+                <div class="article">
+					${support.comment!}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="all-top">
+                <div class="bgfff">
+                    <div class="fw-list">
+                        <ul>
+                        	<#if supportList??&&supportList?size gt 0>
+                        		<#list supportList as entity>
+                        		<#if entity.id==support.id>
+                        			<li class="fw-cur"><a href="${base}/QqsServiceSupport/serviceSupport.html?type=${entity.id!}">${entity.name!}</a></li> 
+                        		<#else>
+                        			<li><a href="${base}/QqsServiceSupport/serviceSupport.html?type=${entity.id!}">${entity.name!}</a></li> 	
+                        		</#if>
+                        		</#list>
+                        	</#if>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+</script>
+</#escape>
+</@main.footer>

@@ -1,0 +1,312 @@
+<@main.header title="产品">
+<#escape x as x?html>
+    <style>
+        body {
+            background:#fff;
+        }
+    </style>
+</#escape>
+</@main.header>
+<@main.body>
+<div class="index-pic">
+		<img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+</div>
+<div class="clearfix"></div>
+
+<div class="container p-t-60">
+    <div class="cp-list-title">
+        <h1>全球安硬件产品</h1>
+    </div>
+    <div class="product-channel-list f-cb">
+        <ul class="f-cb">
+            <#if hardwareList?size gt 0>
+                <#list hardwareList as hardware>
+                    <#if hardware_index % 2 == 0>
+                        <li class="">
+                            <a href="javascript:;" class="tit">
+                                <p class="pic ${hardware_index}">${(hardware.catName)!}</p>
+                            </a>
+                            <#assign productLsit = (productMap[(hardware.catId)?string])!>
+                            <#if productLsit?? && productLsit?size gt 0>
+                            <div class="con" style="display: none;">
+                                <div class="scrollbar">
+                                    <dl>
+
+                                        <#list productLsit as product>
+                                            <dd>
+                                                <a class="dd-tit"
+                                                   href="${base}/QqsProduct/hardwareDetail.html?productId=${(product.productId)!}&type=${(product.type)!0}">${(product.name)!}</a>
+                                                <div class="con-t" style="">
+
+                                                </div>
+                                            </dd>
+                                        </#list>
+
+                                    </dl>
+                                </div>
+                            </div>
+                            </#if>
+                        </li>
+                    </#if>
+                </#list>
+            </#if>
+        </ul>
+
+        <ul class="f-cb">
+            <#if hardwareList?size gt 0>
+                <#list hardwareList as hardware>
+                    <#if hardware_index % 2 == 1>
+                        <li class="">
+                            <a href="javascript:;" class="tit">
+                                <p class="pic ${hardware_index}">${(hardware.catName)!}</p>
+                            </a>
+                            <#assign productLsit = (productMap[(hardware.catId)?string])!>
+                            <#if productLsit?? && productLsit?size gt 0>
+                            <div class="con" style="display: none;">
+                                <div class="scrollbar">
+                                    <dl>
+                                        <#list productLsit as product>
+                                            <dd>
+                                                <a class="dd-tit"
+                                                   href="${base}/QqsProduct/softDetail.html?productId=${(product.productId)!}&type=${(product.type)!0}">${(product.name)!}</a>
+                                                <div class="con-t" style="">
+
+                                                </div>
+                                            </dd>
+                                        </#list>
+                                    </dl>
+
+                                </div>
+                            </div>
+                            </#if>
+                        </li>
+                    </#if>
+                </#list>
+            </#if>
+        </ul>
+
+    </div>
+</div>
+
+
+
+<div class="container p-t-60">
+    <div class="cp-list-title">
+        <h1>全球安软件产品</h1>
+    </div>
+    <div class="product-channel-list f-cb">
+        <ul class="f-cb">
+            <#if softList?size gt 0>
+                <#list softList as soft>
+                    <#if soft_index % 2 == 0>
+                        <li class="">
+                            <a href="javascript:;" class="tit">
+                                <p class="pic ${soft_index}">${(soft.catName)!}</p>
+                            </a>
+                            <#assign productLsit = (productMap[(soft.catId)?string])!>
+                            <#if productLsit?? && productLsit?size gt 0>
+                            <div class="con" style="display: none;">
+                                <div class="scrollbar">
+                                    <dl>
+                                        <#list productLsit as product>
+                                            <dd>
+                                                <a class="dd-tit"
+                                                   href="${base}/QqsProduct/softDetail.html?productId=${(product.productId)!}&type=${(product.type)!0}">${(product.name)!}</a>
+                                                <div class="con-t" style="">
+
+                                                </div>
+                                            </dd>
+                                        </#list>
+                                    </dl>
+
+                                </div>
+                            </div>
+                            </#if>
+                        </li>
+                    </#if>
+                </#list>
+            </#if>
+        </ul>
+
+        <ul class="f-cb">
+            <#if softList?size gt 0>
+                <#list softList as soft>
+                    <#if soft_index % 2 == 1>
+                        <li class="">
+                            <a href="javascript:;" class="tit">
+                                <p class="pic ${hardware_index}">${(soft.catName)!}</p>
+                            </a>
+                            <#assign productLsit = (productMap[(soft.catId)?string])!>
+                            <#if productLsit?? && productLsit?size gt 0>
+                            <div class="con" style="display: none;">
+                                <div class="scrollbar">
+                                    <dl>
+                                        <#list productLsit as product>
+                                            <dd>
+                                                <a class="dd-tit"
+                                                   href="${base}/QqsProduct/detail.html?productId=${(product.productId)!}&type=${(product.type)!0}">${(product.name)!}</a>
+                                                <div class="con-t" style="">
+
+                                                </div>
+                                            </dd>
+                                        </#list>
+                                    </dl>
+
+                                </div>
+                            </div>
+                            </#if>
+                        </li>
+                    </#if>
+                </#list>
+            </#if>
+        </ul>
+
+    </div>
+</div>
+
+<div class="container p-t-60">
+    <div class="cp-list-title">
+        <h1>全球安套餐产品</h1>
+    </div>
+    <div class="product-channel-list f-cb">
+        <ul class="f-cb">
+            <#if setMealList?size gt 0>
+                <#list setMealList as setMeal>
+                    <#if setMeal_index % 2 == 0>
+                        <li class="">
+                            <a href="javascript:;" class="tit">
+                                <p class="pic ${setMeal_index}">${(setMeal.catName)!}</p>
+                            </a>
+                            <#assign productLsit = (productMap[(setMeal.catId)?string])!>
+                            <#if productLsit?? && productLsit?size gt 0>
+                            <div class="con" style="display: none;">
+                                <div class="scrollbar">
+                                    <dl>
+                                        <#list productLsit as product>
+                                            <dd>
+                                                <a class="dd-tit"
+                                                   href="${base}/QqsProduct/detail.html?productId=${(product.productId)!}&type=${(product.type)!0}">${(product.name)!}</a>
+                                                <div class="con-t" style="">
+
+                                                </div>
+                                            </dd>
+                                        </#list>
+                                    </dl>
+
+                                </div>
+                            </div>
+                            </#if>
+                        </li>
+                    </#if>
+                </#list>
+            </#if>
+        </ul>
+
+        <ul class="f-cb">
+            <#if setMealList?size gt 0>
+                <#list setMealList as setMeal>
+                    <#if setMeal_index % 2 == 1>
+                        <li class="">
+                            <a href="javascript:;" class="tit">
+                                <p class="pic ${setMeal_index}">${(setMeal.catName)!}</p>
+                            </a>
+                            <#assign productLsit = (productMap[(setMeal.catId)?string])!>
+                            <#if productLsit?? && productLsit?size gt 0>
+                            <div class="con" style="display: none;">
+                                <div class="scrollbar">
+                                    <dl>
+                                        <#list productLsit as product>
+                                            <dd>
+                                                <a class="dd-tit"
+                                                   href="${base}/QqsProduct/detail.html?productId=${(product.productId)!}&type=${(product.type)!0}">${(product.name)!}</a>
+                                                <div class="con-t" style="">
+
+                                                </div>
+                                            </dd>
+                                        </#list>
+                                    </dl>
+
+                                </div>
+                            </div>
+                            </#if>
+                        </li>
+                    </#if>
+                </#list>
+            </#if>
+        </ul>
+
+    </div>
+</div>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+
+    $(function () {
+
+        var cpsize = $('.wel-case .slides li').length;
+        if (cpsize > 1) {
+            $('.wel-banner').flexslider({
+                animation: 'slide',
+                slideshowSpeed: 4000,
+                animationSpeed: 1000,
+                touch: true,
+                slideshow: true,
+                start: function (slider) {
+                    flexslider = slider;
+                    $('.wel-banner .loader').hide();
+                    $('.flex-direction-nav a').text("");
+                }
+            });
+        }
+        ;
+
+
+        $('.product-channel-list ul:odd').addClass('odd');
+
+        $('.product-channel-list li .tit').on('click', function () {
+            var _this = $(this).parent('li');
+            if (_this.hasClass('out')) {
+                _this.removeClass('out');
+                _this.find('.con').slideUp();
+                _this.find('.dd-tit').removeClass('cur');
+                _this.find('.con-t').slideUp();
+            } else {
+                _this.addClass('out').siblings('li').removeClass('out').parent('ul').siblings('ul').find('li').removeClass('out');
+                _this.find('.con').slideDown().parent('li').siblings('li').find('.con').slideUp().parents('ul').siblings('ul').find('li').find('.con').slideUp();
+                _this.siblings('li').find('.dd-tit').removeClass('cur');
+                _this.siblings('li').find('.con-t').slideUp();
+                _this.parent('ul').siblings('ul').find('.dd-tit').removeClass('cur');
+                _this.parent('ul').siblings('ul').find('.con-t').slideUp();
+            }
+        })
+
+        $('.product-channel-list li .dd-tit').on('click', function () {
+            var _this = $(this)
+            if (_this.hasClass('cur')) {
+                _this.removeClass('cur');
+                _this.next('.con-t').slideUp();
+                _this.next('.con-t').find('.tb-box').slideUp();
+                _this.next('.con-t').find('.con-tb').removeClass('cur');
+            } else {
+                _this.addClass('cur').parent('dd').siblings('dd').find('.dd-tit').removeClass('cur');
+                _this.next('.con-t').slideDown().parent('dd').siblings('dd').find('.con-t').slideUp();
+                _this.parent('dd').siblings('dd').find('.con-t').find('.tb-box').slideUp();
+                _this.parent('dd').siblings('dd').find('.con-t').find('.con-tb').removeClass('cur');
+            }
+        })
+
+        $('.product-channel-list li .con-tb').on('click', function () {
+            var _this = $(this)
+            if (_this.hasClass('cur')) {
+                _this.removeClass('cur');
+                _this.next('.tb-box').slideUp();
+            } else {
+                _this.addClass('cur').siblings('.con-tb').removeClass('cur');
+                _this.next('.tb-box').slideDown().siblings('.tb-box').slideUp();
+            }
+        })
+    });
+</script>
+</#escape>
+</@main.footer>

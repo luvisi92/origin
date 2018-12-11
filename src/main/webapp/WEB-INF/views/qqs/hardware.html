@@ -1,0 +1,50 @@
+<@main.header title="硬件产品中心">
+<#escape x as x?html>
+<script>
+    var imgPath = '${setting['files.contextpath']}';
+</script>
+</#escape>
+</@main.header>
+<@main.body>
+
+<!--幻灯片-->
+<!-- Swiper -->
+<div class="index-pic">
+   <img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+</div>
+<!--幻灯片结束-->
+<div  class="clearfix"></div>
+<div class="container project-list">
+    <div class="row">
+        <#if (pager.entityList)?exists && ((pager.entityList)?size gt 0)>
+            <#list pager.entityList as entity>
+                <div class="col-md-4 col-sm-6">
+                    <div class="project-box">
+                        <div class="project-pic">
+                            <img src="${setting['files.contextpath']}${(entity.pic)!}" />
+                        </div>
+                        <div class="con">
+                            <a href="${base}/QqsProduct/hardwareDetail.html?productId=${(entity.productId)!}&type=${type!}">
+                                <h3 class="one-text">${(entity.name)!}</h3>
+                                <p class="project-font">${(entity.model)!}</p>
+                                <p class="project-more">查看详情</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </#list>
+        </#if>
+    </div>
+</div>
+
+<form id="searchForm" method="post" action="${base}/QqsProduct/list.html">
+    <input type="hidden" name="type" value="${type!}">
+    <input type="hidden" name="selectCatId" value="${(RequestParameters.selectCatId)!0}">
+    <@main.websitePager pager=pager>
+    </@main.websitePager>
+</form>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+</#escape>
+</@main.footer>

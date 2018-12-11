@@ -1,0 +1,99 @@
+<@main.header title="产品">
+<#escape x as x?html>
+</#escape>
+</@main.header>
+<@main.body>
+
+<!--产品详情-->
+<div class="container project-detailed">
+    <div class="row">
+        <div class="col-md-6 f16">
+            <div class="nav-bread">
+                <ul>
+                <#if categoryList?? && categoryList?size gt 0>
+                <#list categoryList as category>
+                    <li><a href="${base}/QqsProduct/list.html?type=${(RequestParameters.type)!}&selectCatId=${(category.catId)!}">${(category.catName)}</a></li>
+                </#list>
+                </#if>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb nav-bread-list" style="padding-left: 0;">
+                <li><a href="${base}/QqsProduct/list.html?type=${(RequestParameters.type)!}">产品中心</a></li>
+                <li class="active">${(RequestParameters.catName)!}</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="bgfff">
+                <div class="article">
+                    <h2>${(entity.name)!}</h2>
+                    <div class="f999 f14 p-t-10">${(entity.reading)!1}阅读 ${(entity.createTime?string("yyyy-MM-dd"))!}</div>
+                        <div class="p-t-60">
+                            ${(article.comment)!}
+                        </div>
+
+                </div>
+            </div>
+            <div class="bgfff m-t-20 pd30">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="active-but">
+                            <a href="###" onclick="product(${(previousProduct.productId)!})">上一篇</a>
+                        </div>
+                        <p class="p-t-20">
+                            <a href="###" onclick="product(${(previousProduct.productId)!})">${(previousProduct.name)!"没有了"}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="active-but active-but-r">
+                            <a href="###" onclick="product(${(nextProduct.productId)!})">下一篇</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <p class="p-t-20 active-but-t">
+                            <a href="###" onclick="product(${(nextProduct.productId)!})">${(nextProduct.name)!"没有了"}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 all-top">
+            <div class="bgfff active-title">
+                <h3 class="">相关软件产品</h3>
+                <div class="lf-newest">
+                    <div class="newest-lists" style="height: 305px; overflow: hidden;">
+                        <ul>
+                        <#if (pager.entityList)?? && pager.entityList?size gt 0>
+                        <#list pager.entityList as product>
+                            <li class="list_item">
+                                <span class="line"></span>
+                                <a href="###" onclick="product(${(product.productId)!})">
+                                    <p class="nl-title">${(product.name)!}</p>
+                                </a>
+                            </li>
+                        </#list>
+                        </#if>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+    function product(productId) {
+        if (productId) {
+            window.location.href = "${base}/QqsProduct/softDetail.html?type=${(RequestParameters.type)!}&catName=${RequestParameters.catName!}&selectCatId=${RequestParameters.selectCatId!}&productId="
+                + productId;
+        }
+    }
+</script>
+</#escape>
+</@main.footer>

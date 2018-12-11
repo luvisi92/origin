@@ -1,0 +1,157 @@
+<@main.header title="新闻中心">
+<#escape x as x?html> 
+    <style>
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+            top:0
+
+        }
+        .swiper-wrapper{width:100%;height:auto}
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+
+            position: relative;
+        }
+
+        .swiper-slide img{width:100%;height:100%;}
+
+    </style>
+<script>
+	var imgPath = '${setting['files.contextpath']}';
+</script>	
+</#escape> 
+</@main.header>
+<@main.body>
+<div class="all-height"></div>
+<div class="container ">
+    <div class="row">
+        <div class="col-md-6 f16">
+            <div class="nav-bread new-pd">
+                <ul>
+                    <li <#if type=='1'>class="news-cur"</#if>><a href="${base}/QqsNews/news.html?type=1">新闻中心</a></li>
+                    <li <#if type=='2'>class="news-cur"</#if>><a href="${base}/QqsNews/news.html?type=2">企业资讯</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper-container ">
+    <div class="swiper-wrapper">
+    	<#if carouselList??&&carouselList?size gt 0>
+    	<#list carouselList as carousel>
+        <div class="swiper-slide " onclick="window.location.href='${base}/QqsNews/detail.html?id=${carousel.newsId!}';">
+            <div class="grid">
+                <figure class="effect-lily">
+                    <img src="<#if (carousel.picture)?? && carousel.picture != ''>${setting['files.contextpath']}${(carousel.picture)!}</#if>" alt="img01" onerror="this.src='${base}/assets/images/1.jpg'">
+                    <figcaption>
+                        <h4>${carousel.title!}</h4>
+                        <p>${carousel.brief!}</p>
+                    </figcaption>
+                    <em></em>
+                </figure>
+            </div>
+        </div>        
+        </#list>
+        </#if>            
+    </div>
+    <div class="swiper-button-next-new swiper-button-white"></div>
+    <div class="swiper-button-prev-new swiper-button-white"></div>
+</div>
+
+<div class="clearfix"></div>
+<form method="post" id="searchForm" action="${base}/QqsNews/news.html?type=${type!1}" autocomplete="off">
+<div class="container new-box">
+    <div class="row">
+		<#if (pager.entityList)?exists && ((pager.entityList)?size != 0)>
+		<#list pager.entityList as entity>     
+        <div class="col-md-4 col-sm-6">
+            <div class="news-list">
+                <img src="<#if (entity.picture)?? && entity.picture != ''>${setting['files.contextpath']}${(entity.picture)!}</#if>" />
+                <div class="pd10">
+                    <a href="${base}/QqsNews/detail.html?id=${entity.newsId!}">
+                        <div class="one-text f18 p-t-10">
+                        	<#if entity.title??&&(entity.title)?length gt 15>
+                        		${(entity.title!)?substring(0,15)}...
+                        	<#else>
+                        		${entity.title!}
+                        	</#if>
+                        </div>
+                        <div class="one-text f14 f999 p-t-6">
+                        	<#if entity.title??&&(entity.title)?length gt 15>
+                        		${(entity.title!)?substring(0,15)}...
+                        	<#else>
+                        		${entity.title!}
+                        	</#if>                        
+                        </div>
+                    </a>
+                </div>
+                <div class="news-list-bottom ">
+                    <div class="l f14 f999">阅读 ${entity.reading!0}</div>
+                    <div class="r f14 f999">${(entity.publishTime!)?string('yyyy-MM-dd')}</div>
+                </div>
+            </div>
+        </div>
+		</#list>
+		</#if>          
+    </div>
+</div>
+    <div>
+			<@main.websitePager pager=pager/>
+	</div>
+</form>
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+var swiper = new Swiper('.swiper-container', {
+    slidesPerView:4,
+    spaceBetween: 0,
+    centeredSlides: true,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next-new',
+        prevEl: '.swiper-button-prev-new',
+    },
+    breakpoints: {
+        1024: {
+            slidesPerView:3,
+            spaceBetween: 0,
+        },
+        768: {
+            slidesPerView:2,
+            spaceBetween: 0,
+        },
+        640: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+        },
+        320: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+        }
+    }
+});
+</script>
+</#escape>
+</@main.footer>

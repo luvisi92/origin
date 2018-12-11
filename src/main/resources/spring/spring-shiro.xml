@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+    
+    <!-- 会话DAO -->  
+    <bean id="memSessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO">  
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>  
+    </bean>
+    <bean id="memCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="myAuthorizeRealm" />
+		<property name="cacheManager" ref="memCacheManager" />
+		<property name="sessionManager" ref="sessionManager" />
+	</bean>
+	<!-- 会话ID生成器 -->
+    <bean id="sessionIdGenerator" class="com.zhisou.qqs.portal.website.core.SidSessionIdGenerator"/>
+         
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
+        <constructor-arg value="sid"/>  
+        <property name="httpOnly" value="true"/>  
+        <property name="maxAge" value="180000"/>  
+    </bean> 
+    
+	<bean id="sessionManager" class="com.zhisou.qqs.portal.website.core.SidWebSessionManager">
+	    <!-- <property name="globalSessionTimeout" value="3600000"/>
+        <property name="deleteInvalidSessions" value="true"/>  
+        <property name="sessionValidationSchedulerEnabled" value="true"/>    --> 
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="sessionDAO" ref="memSessionDAO"/>  
+        <property name="sessionIdCookieEnabled" value="true"/>  
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>  
+	</bean>
+
+	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+		<property name="interval" value="1800000"/>
+		 <property name="sessionManager" ref="sessionManager"/>  
+	</bean>
+
+	<bean id="myAuthorizeRealm" class="com.zhisou.qqs.portal.website.core.AuthorizeRealm">
+	</bean>
+	<!-- Post processor that automatically invokes init() and destroy() methods -->
+
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	
+	<bean id="loadFilterChainDefinitions" class="com.likegene.framework.core.shiro.LoadFilterChainDefinitions"/>
+	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login.html" />
+		<property name="successUrl" value="/index.html" />
+		<property name="unauthorizedUrl" value="/401.html" />
+		<property name="filters">
+			<util:map>
+				<entry key="autoLogin">
+					<bean
+						class="com.zhisou.qqs.portal.website.core.AutoLoginAuthenticationFilter" />
+				</entry>
+				<entry key="authc">
+					<bean
+						class="com.zhisou.qqs.portal.website.core.EnhanceAuthenticationFilter" />
+				</entry>
+				<entry key="roles">
+					<bean
+						class="com.zhisou.qqs.portal.website.core.RolesAuthorizationFilter" />
+				</entry>
+			</util:map>
+		</property>
+		<property name="filterChainDefinitions" value="#{loadFilterChainDefinitions.loadAll()}">
+		</property>
+	</bean>
+	
+</beans>

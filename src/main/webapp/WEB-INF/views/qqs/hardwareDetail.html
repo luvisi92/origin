@@ -1,0 +1,79 @@
+<@main.header title="硬件产品详情">
+<#escape x as x?html>
+</#escape>
+</@main.header>
+<@main.body>
+
+<!--产品详情-->
+<div class="container project-detailed">
+    <div class="row">
+        <div class="col-md-6 f16">
+           <div class="nav-bread">
+               <ul>
+                <#if categoryList?? && categoryList?size gt 0>
+                <#list categoryList as category>
+                    <#if category.catId == product.catId>
+                        <#assign catName=category.catName>
+                    </#if>
+                    <li><a href="${base}/QqsProduct/list.html?type=${type!}&selectCatId=${(category.catId)!}">${(category.catName)}</a></li>
+                </#list>
+                </#if>
+               </ul>
+           </div>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb nav-bread-list" style="padding-left: 0;">
+                <li><a href="${base}/QqsProduct/list.html?type=${type!}">产品中心</a></li>
+                <li class="active">${catName!}</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7 t-center">
+            <div class="project-img">
+                <img src="${setting['files.contextpath']}${(product.pic)!}"/>
+            </div>
+            <h2 class="t-left p-t-20">${(product.name)!}</h2>
+            <p class="f999 t-left f20">${(product.model)!}</p>
+        </div>
+        <div class="col-md-5">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a class="" role="button" data-toggle="collapse" data-parent="#accordion"
+                                 href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">产品概述</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">${(product.productDesc)!}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                 href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">尺寸图</a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <img src="${setting['files.contextpath']}${(product.drawing)!}"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+</script>
+</#escape>
+</@main.footer>

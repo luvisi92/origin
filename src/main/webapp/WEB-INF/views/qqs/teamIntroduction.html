@@ -1,0 +1,232 @@
+<@main.header title="关于我们">
+<#escape x as x?html> 
+<script>
+	var imgPath = '${setting['files.contextpath']}';
+</script>	
+    <style>
+        body {
+            background:#fff;
+        }
+    </style>
+</#escape> 
+</@main.header>
+<@main.body>
+<div class="all-height"></div>
+<div class="all-pic">
+   	<img src="${setting['files.contextpath']}${(banner.pic)!}"/>
+</div>
+<div class="container">
+    <div class="pb30">
+        <div class="">
+            <div class="f22">拥有丰富行业经验的资深专业团队</div>
+            <div class="f16 p-t-20 f666">由软件工程博士毕业的高级管理人员领导；</div>
+            <div class="f16 p-t-20 f666">有国内专科院士与中科院共同研发新项目；</div>
+            <div class="f16 p-t-20 f666">基于对本土客户的深刻洞察，结合国际化视野，提供精准、高效的服务；</div>
+            <div class="f16 p-t-20 f666">熟悉中国大陆的安防准则；</div>
+            <div class="f16 p-t-20 f666">拥有丰富的安防资质，包含迪威乐在内的各类授权机构涵盖全国1800点的线下连锁。</div>
+        </div>
+    </div>
+</div>
+
+<div class="team-pc">
+	<#if orgList??&&orgList?size gt 0 >
+	<#list orgList as org>
+	<#if map['${org.id}']??&&map['${org.id}']?size gt 0>
+    <div class="container-fluid top-border">
+        <div class="container">
+            <div class="p-t-30">
+                <h4>${org.name!}</h4>
+            </div>
+        </div>
+        	<#list map['${org.id}'] as team1List>
+	        <div class="team">
+	            <div class="team-box">
+	            	<#if team1List??&&team1List?size gt 0>
+	            	<#list team1List as team>
+	                <div class="l width50 team-line flex">
+	                    <div class="team-box-pic">
+	                        <img src="images/boss.jpg" />
+	                    </div>
+	                    <div class="flex-one p-l-20">
+	                        <p class="f18">${team.nameZh!}</p>
+	                        <div>${team.nameEn!}</div>
+	                        <div>${team.positionName!}</div>
+	                    </div>
+	                    <div class=" f999 p-r-20 team-more team-more-pc" id="pc_${org.id}_${team1List_index}" data="${team.brief!}">
+	                          <i class="iconfont icon-hao"></i>
+	                    </div>
+	                </div>
+	                </#list>
+	                </#if>
+	            </div>
+	            <div class="pc_${org.id}_${team1List_index}-more hide">
+	                <div class="container">
+	                    <div class="pd30"></div>
+	                </div>
+	            </div>	            
+	        </div>        	
+        	</#list>
+    </div>	
+    </#if>
+	</#list>
+	</#if>
+    <div class="container-fluid top-border">
+        <div class="container">
+            <div class="p-t-30">
+                <h4></h4>
+            </div>
+        </div>
+        <#if noOrgTeamList1??&&noOrgTeamList1?size gt 0>
+        	<#list noOrgTeamList1 as noOrgTeamList2>
+	        <div class="team">
+	            <div class="team-box">
+	            	<#if noOrgTeamList2??&&noOrgTeamList2?size gt 0>
+	            	<#list noOrgTeamList2 as noOrgteam>
+	                <div class="l width50 team-line flex">
+	                    <div class="team-box-pic">
+	                        <img src="images/boss.jpg" />
+	                    </div>
+	                    <div class="flex-one p-l-20">
+	                        <p class="f18">${noOrgteam.nameZh!}</p>
+	                        <div>${noOrgteam.nameEn!}</div>
+	                        <div>${noOrgteam.positionName!}</div>
+	                    </div>
+	                    <div class=" f999 p-r-20 team-more team-more-pc" id="pc_no_${noOrgTeamList2_index}" data="${noOrgteam.brief!}">
+	                          <i class="iconfont icon-hao"></i>
+	                    </div>
+	                </div>
+	                </#list>
+	                </#if>
+	            </div>
+	            <div class="pc_no_${noOrgTeamList2_index}-more hide">
+	                <div class="container">
+	                    <div class="pd30"></div>
+	                </div>
+	            </div>	            
+	        </div>        	
+        	</#list>
+        </#if>
+    </div>
+</div>
+
+<!--手机模式下-->
+<#if orgList??&&orgList?size gt 0>
+<#list orgList as org>
+<#if mapMobile['${org.id}']??&&mapMobile['${org.id}']?size gt 0>
+<div class="mobile-team-phone">
+    <div class="container-fluid top-border">
+        <div class="container">
+            <div class="p-t-30">
+                <h4>${org.name!}</h4>
+            </div>
+        </div>
+    </div>
+    <#list mapMobile['${org.id}'] as mTeam>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="team-line flex no-after">
+                    <div class="team-box-pic">
+                        <img src="images/boss.jpg" />
+                    </div>
+                    <div class="flex-one p-l-20">
+                        <p class="f18">${mTeam.nameZh!}${mTeam_index}</p>
+                        <div>${mTeam.nameEn!}</div>
+                        <div>${mTeam.positionName!}</div>
+                    </div>
+                    <div class=" f999 p-r-20 team-more team-more-mobile" id="mobile_${org.id}_${mTeam_index}">
+                        <i class="iconfont icon-hao"></i>
+                    </div>
+                </div>
+                <div class="mobile_${org.id}_${mTeam_index}-more hide">
+                    <div class="container">
+                        <div class="pd30">${mTeam.brief!}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+	</#list>
+</div>
+</#if>
+</#list>
+</#if>
+<#if noOrgTeamList??&&noOrgTeamList?size gt 0>
+<div class="mobile-team-phone">
+    <div class="container-fluid top-border">
+        <div class="container">
+            <div class="p-t-30">
+                <h4></h4>
+            </div>
+        </div>
+    </div>
+    <#list noOrgTeamList as mTeamNo>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="team-line flex no-after">
+                    <div class="team-box-pic">
+                        <img src="images/boss.jpg" />
+                    </div>
+                    <div class="flex-one p-l-20">
+                        <p class="f18">${mTeamNo.nameZh!}</p>
+                        <div>${mTeamNo.nameEn!}</div>
+                        <div>${mTeamNo.positionName!}</div>
+                    </div>
+                    <div class=" f999 p-r-20 team-more team-more-mobile" id="mobile_${mTeamNo_index}">
+                        <i class="iconfont icon-hao"></i>
+                    </div>
+                </div>
+                <div class="mobile_${mTeamNo_index}-more hide">
+                    <div class="container">
+                        <div class="pd30">${mTeamNo.brief!}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+	</#list>
+</div>
+</#if>
+<!--手机模式下结束-->
+</@main.body>
+<@main.footer>
+<#escape x as x?html>
+<script>
+//团队介绍点击
+$('.team-more-pc').click(function () {
+	var id = $(this).attr("id");
+    if($(this).hasClass('demo_cur')){
+        $(this).html('<i class="iconfont icon-hao"></i>');
+        $('.'+id+'-more').slideUp();
+        $('.'+id+'-more .container .pd30').html("");
+        $(this).removeClass('demo_cur')
+    }else{
+	   	$.each($(this).parent().parent().find(".team-more-pc"), function(i,val){     
+	   		$(val).removeClass('demo_cur')
+	   		$(val).html('<i class="iconfont icon-hao"></i>');
+	   	});    
+        $(this).html('<i class="iconfont icon-cha"></i>');
+        $('.'+id+'-more').slideDown();
+        $('.'+id+'-more .container .pd30').html($(this).attr("data"));
+        $(this).addClass('demo_cur')
+    }
+
+});
+//团队介绍点击
+$('.team-more-mobile').click(function () {
+	var id = $(this).attr("id");
+    if($(this).hasClass('demo_cur')){
+        $(this).html('<i class="iconfont icon-hao"></i>');
+        $('.'+id+'-more').slideUp();
+        $(this).removeClass('demo_cur')
+    }else{
+        $(this).html('<i class="iconfont icon-cha"></i>');
+        $('.'+id+'-more').slideDown();
+        $(this).addClass('demo_cur')
+    }
+
+});
+</script>
+</#escape>
+</@main.footer>
