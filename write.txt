@@ -1,2 +1,0 @@
-echo 'hellonew' >> /data/hh/mvn1
-# 增加一段新文字linux用户
